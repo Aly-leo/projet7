@@ -24,15 +24,8 @@ const NAV: NavItem[] = [
   imports: [RouterOutlet, RouterLink, RouterLinkActive, IconComponent],
   styles: `
     :host { display: block; min-height: 100vh; }
-    .sim-banner {
-      position: sticky; top: 0; z-index: 30; display: flex; align-items: center; justify-content: center; gap: 0.5rem;
-      padding: 0.45rem 1rem; text-align: center; font-size: 0.83rem; font-weight: 600; color: var(--warning);
-      background: color-mix(in srgb, var(--warning) 10%, var(--glass-strong));
-      -webkit-backdrop-filter: var(--blur); backdrop-filter: var(--blur);
-      border-bottom: 1px solid color-mix(in srgb, var(--warning) 28%, transparent);
-    }
     .layout { display: grid; grid-template-columns: 250px 1fr; gap: 1.1rem; padding: 1.1rem; align-items: start; }
-    nav.side { position: sticky; top: 3.4rem; padding: 1rem 0.7rem; display: flex; flex-direction: column; gap: 0.2rem; max-height: calc(100vh - 4.5rem); overflow: auto; }
+    nav.side { position: sticky; top: 1.1rem; padding: 1rem 0.7rem; display: flex; flex-direction: column; gap: 0.2rem; max-height: calc(100vh - 2.2rem); overflow: auto; }
     .brand { display: flex; align-items: center; gap: 0.65rem; padding: 0.3rem 0.7rem 1rem; font-weight: 700; color: var(--accent-strong); }
     .brand .logo { width: 34px; height: 34px; border-radius: 11px; display: grid; place-items: center; color: #fff;
       background: linear-gradient(135deg, #6aa5e0, #29375f); box-shadow: 0 6px 16px rgba(58, 103, 157, 0.35); }
@@ -57,10 +50,6 @@ const NAV: NavItem[] = [
     }
   `,
   template: `
-    <div class="sim-banner" role="status">
-      <app-icon name="flask" />
-      Mode simulation : les prédictions de M1 et M2 sont simulées. Les modèles ne sont pas encore entraînés.
-    </div>
     <div class="layout">
       <nav class="side glass" [class.open]="menuOpen()" aria-label="Navigation principale">
         <div class="brand">

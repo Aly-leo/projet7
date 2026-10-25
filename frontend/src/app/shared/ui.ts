@@ -51,13 +51,6 @@ export class PriorityComponent {
 }
 
 @Component({
-  selector: 'app-sim-tag',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `<span class="sim-tag" title="Valeur simulée : les modèles ne sont pas entraînés">Simulé</span>`,
-})
-export class SimTagComponent {}
-
-@Component({
   selector: 'app-password-strength',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styles: `

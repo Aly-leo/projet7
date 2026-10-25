@@ -6,12 +6,12 @@ import { AuthService } from '../core/auth.service';
 import { Aggregate, Application, PRIORITY_LABEL, STATUS_LABEL, SEVERITY_LABEL, type CorrectionStatus, type Priority } from '../core/models';
 import { ToastService } from '../core/toast.service';
 import { ChartComponent } from '../shared/chart.component';
-import { IconComponent, PriorityComponent, SimTagComponent } from '../shared/ui';
+import { IconComponent, PriorityComponent } from '../shared/ui';
 
 @Component({
   selector: 'app-dashboard',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FormsModule, RouterLink, ChartComponent, IconComponent, PriorityComponent, SimTagComponent],
+  imports: [FormsModule, RouterLink, ChartComponent, IconComponent, PriorityComponent],
   styles: `
     .kpi { padding: 1.1rem 1.25rem; display: flex; flex-direction: column; gap: 0.15rem; position: relative; overflow: hidden; }
     .kpi .n { font-size: 2.2rem; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; }
@@ -27,7 +27,7 @@ import { IconComponent, PriorityComponent, SimTagComponent } from '../shared/ui'
           <h1>Tableau de bord</h1>
           <p>
             @if (auth.role() === 'DECISION_MAKER') { Vue agrégée : aucun détail de constat n'est exposé. } @else { Vue d'ensemble des priorités à traiter. }
-            <app-sim-tag />
+            
           </p>
         </div>
         <div class="filters">
@@ -60,7 +60,7 @@ import { IconComponent, PriorityComponent, SimTagComponent } from '../shared/ui'
           @for (p of priorities; track p) {
             <div class="kpi glass" [style.--c]="'var(--' + p.toLowerCase() + ')'">
               <span class="n" [style.color]="'var(--' + p.toLowerCase() + ')'">{{ d.byPriority[p] }}</span>
-              <span class="l">{{ p }} · {{ label(p) }}<app-sim-tag /></span>
+              <span class="l">{{ p }} · {{ label(p) }}</span>
             </div>
           }
         </div>
@@ -117,7 +117,7 @@ import { IconComponent, PriorityComponent, SimTagComponent } from '../shared/ui'
                   <tbody>
                     @for (f of d.topFindings; track f.id) {
                       <tr class="clickable" tabindex="0" (click)="open(f.id)" (keydown.enter)="open(f.id)">
-                        <td class="nowrap"><app-priority [value]="f.priority" /><app-sim-tag /></td>
+                        <td class="nowrap"><app-priority [value]="f.priority" /></td>
                         <td class="truncate">{{ f.title }}</td>
                         <td>{{ f.application.name }}</td>
                         <td>@if (f.correction) { <span class="badge neutral">{{ status(f.correction.status) }}</span> }</td>

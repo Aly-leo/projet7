@@ -14,7 +14,6 @@ import { IconComponent } from '../shared/ui';
     .logo { width: 48px; height: 48px; border-radius: 15px; display: grid; place-items: center; color: #fff; margin-bottom: 1rem;
       background: linear-gradient(135deg, #6aa5e0, #29375f); box-shadow: 0 10px 24px rgba(58, 103, 157, 0.35); }
     .logo app-icon { transform: scale(1.3); display: grid; }
-    .sim { margin-top: 1.2rem; font-size: 0.78rem; text-align: center; color: var(--warning); }
   `,
   template: `
     <button class="btn ghost small theme" type="button" (click)="theme.toggle()" [attr.aria-label]="'Changer de thème'">
@@ -23,7 +22,6 @@ import { IconComponent } from '../shared/ui';
     <section class="panel glass">
       <div class="logo"><app-icon name="shield" /></div>
       <ng-content />
-      <p class="sim">Mode simulation : les prédictions de M1 et M2 sont simulées.</p>
     </section>
   `,
 })

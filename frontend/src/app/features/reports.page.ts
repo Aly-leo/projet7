@@ -15,7 +15,7 @@ type Kind = 'summary' | 'application' | 'scan';
   imports: [FormsModule, DatePipe, IconComponent],
   template: `
     <div class="page">
-      <div class="page-header"><div><h1>Rapports PDF</h1><p>Générés à la demande, avec la mention « Prédictions simulées ».</p></div></div>
+      <div class="page-header"><div><h1>Rapports PDF</h1><p>Générés à la demande, au moment du téléchargement.</p></div></div>
       <section class="glass card">
         <form class="stack" (ngSubmit)="download()">
           <div class="form-grid">

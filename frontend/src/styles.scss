@@ -228,16 +228,7 @@ tbody tr:nth-child(even) { background: var(--table-stripe); }
 tbody tr.clickable { cursor: pointer; }
 tbody tr.clickable:hover { background: var(--accent-soft); }
 td.nowrap { white-space: nowrap; }
-td .sim-tag { font-size: 0.6rem; margin-left: 0.3rem; }
-td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
-td.truncate { max-width: 420px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-
-/* ---------- Pastilles ---------- */
-.badge {
-  display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.15rem 0.6rem; border-radius: 999px;
-  font-size: 0.76rem; font-weight: 700; border: 1px solid transparent; white-space: nowrap;
-}
-.badge.P1 { color: var(--p1); background: color-mix(in srgb, var(--p1) 14%, transparent); border-color: color-mix(in srgb, var(--p1) 30%, transparent); }
+td .badge.P1 { color: var(--p1); background: color-mix(in srgb, var(--p1) 14%, transparent); border-color: color-mix(in srgb, var(--p1) 30%, transparent); }
 .badge.P2 { color: var(--p2); background: color-mix(in srgb, var(--p2) 14%, transparent); border-color: color-mix(in srgb, var(--p2) 30%, transparent); }
 .badge.P3 { color: var(--p3); background: color-mix(in srgb, var(--p3) 14%, transparent); border-color: color-mix(in srgb, var(--p3) 30%, transparent); }
 .badge.P4 { color: var(--p4); background: color-mix(in srgb, var(--p4) 14%, transparent); border-color: color-mix(in srgb, var(--p4) 30%, transparent); }
@@ -245,12 +236,6 @@ td.truncate { max-width: 420px; overflow: hidden; text-overflow: ellipsis; white
 .badge.ok { color: var(--success); background: color-mix(in srgb, var(--success) 14%, transparent); }
 .badge.warn { color: var(--warning); background: color-mix(in srgb, var(--warning) 14%, transparent); }
 .badge.bad { color: var(--danger); background: color-mix(in srgb, var(--danger) 14%, transparent); }
-.sim-tag {
-  display: inline-block; margin-left: 0.4rem; padding: 0 0.45rem; border-radius: 6px; font-size: 0.68rem; font-weight: 700;
-  letter-spacing: 0.04em; text-transform: uppercase; color: var(--warning);
-  background: color-mix(in srgb, var(--warning) 13%, transparent); border: 1px dashed color-mix(in srgb, var(--warning) 45%, transparent);
-  vertical-align: middle;
-}
 
 /* ---------- Retours ---------- */
 .alert { padding: 0.75rem 1rem; border-radius: var(--radius-sm); font-size: 0.9rem; border: 1px solid; }

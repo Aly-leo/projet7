@@ -3,14 +3,14 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService, errorMessage } from '../core/api.service';
 import { Application, FindingRow, Page, SEVERITY_LABEL, STATUS_LABEL, type CorrectionStatus } from '../core/models';
-import { PriorityComponent, SimTagComponent } from '../shared/ui';
+import { PriorityComponent } from '../shared/ui';
 
 const STATUSES = Object.keys(STATUS_LABEL) as CorrectionStatus[];
 
 @Component({
   selector: 'app-findings',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FormsModule, PriorityComponent, SimTagComponent],
+  imports: [FormsModule, PriorityComponent],
   styles: `
     .filters { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.6rem; }
     .pager { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 0.8rem; }
@@ -18,7 +18,7 @@ const STATUSES = Object.keys(STATUS_LABEL) as CorrectionStatus[];
   template: `
     <div class="page">
       <div class="page-header">
-        <div><h1>Constats</h1><p>Classés par priorité. Les priorités et probabilités sont simulées.</p></div>
+        <div><h1>Constats</h1><p>Classés par priorité.</p></div>
       </div>
 
       <section class="glass card">
@@ -66,7 +66,7 @@ const STATUSES = Object.keys(STATUS_LABEL) as CorrectionStatus[];
                 <tbody>
                   @for (f of d.items; track f.id) {
                     <tr class="clickable" tabindex="0" (click)="open(f.id)" (keydown.enter)="open(f.id)">
-                      <td class="nowrap"><app-priority [value]="f.priority" /><app-sim-tag /></td>
+                      <td class="nowrap"><app-priority [value]="f.priority" /></td>
                       <td class="truncate" [title]="f.title">{{ f.title }}</td>
                       <td>{{ f.application.name }}</td>
                       <td>{{ sev(f.severity) }}</td>

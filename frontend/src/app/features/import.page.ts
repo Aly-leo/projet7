@@ -4,14 +4,14 @@ import { RouterLink } from '@angular/router';
 import { ApiService, errorMessage } from '../core/api.service';
 import { Application, ImportSummary, PRIORITY_LABEL, type Priority } from '../core/models';
 import { ToastService } from '../core/toast.service';
-import { IconComponent, SimTagComponent } from '../shared/ui';
+import { IconComponent } from '../shared/ui';
 
 const MAX_MB = 10;
 
 @Component({
   selector: 'app-import',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FormsModule, RouterLink, IconComponent, SimTagComponent],
+  imports: [FormsModule, RouterLink, IconComponent],
   styles: `
     .drop { border: 1.5px dashed var(--glass-edge); border-radius: var(--radius); padding: 1.6rem; text-align: center; transition: background 0.2s, border-color 0.2s; }
     .drop.over { background: var(--accent-soft); border-color: var(--accent); }
@@ -58,12 +58,12 @@ const MAX_MB = 10;
 
       @if (result(); as r) {
         <section class="glass card" aria-live="polite">
-          <h2>Résumé de l'import <app-sim-tag /></h2>
+          <h2>Résumé de l'import</h2>
           <div class="grid cols-4" style="margin:.6rem 0 1rem">
             <div><div class="muted">Constats</div><strong style="font-size:1.6rem">{{ r.findingsTotal }}</strong></div>
             <div><div class="muted">Nouveaux</div><strong style="font-size:1.6rem">{{ r.findingsNew }}</strong></div>
             <div><div class="muted">Mis à jour</div><strong style="font-size:1.6rem">{{ r.findingsUpdated }}</strong></div>
-            <div><div class="muted">Fournisseur</div><strong style="font-size:1.1rem">{{ r.provider === 'anthropic' ? 'API Claude (simulation)' : 'Règles (simulation)' }}</strong></div>
+            <div><div class="muted">Fournisseur</div><strong style="font-size:1.1rem">{{ r.provider === 'anthropic' ? 'API Claude' : 'Règles' }}</strong></div>
           </div>
           <div class="prio">
             @for (p of priorities; track p) { <span class="badge" [class]="p">{{ p }} · {{ label(p) }} : {{ r.byPriority[p] }}</span> }

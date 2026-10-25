@@ -8,12 +8,12 @@ import {
   type CorrectionStatus, type Priority, type User,
 } from '../core/models';
 import { ToastService } from '../core/toast.service';
-import { PriorityComponent, SimTagComponent } from '../shared/ui';
+import { PriorityComponent } from '../shared/ui';
 
 @Component({
   selector: 'app-finding-detail',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FormsModule, RouterLink, DatePipe, PriorityComponent, SimTagComponent],
+  imports: [FormsModule, RouterLink, DatePipe, PriorityComponent],
   styles: `
     .desc { white-space: pre-line; }
     .urls { margin: 0; padding-left: 1.1rem; font-size: 0.85rem; word-break: break-all; }
@@ -36,7 +36,7 @@ import { PriorityComponent, SimTagComponent } from '../shared/ui';
             <h1>{{ d.title }}</h1>
             <p>{{ d.application.name }} · {{ sev(d.severity) }} · {{ d.cveId ?? (d.cweId ? 'CWE-' + d.cweId : 'sans CWE') }}</p>
           </div>
-          <div class="row"><app-priority [value]="d.priority" /><app-sim-tag /></div>
+          <div class="row"><app-priority [value]="d.priority" /></div>
         </div>
 
         <div class="grid cols-2">
@@ -59,18 +59,18 @@ import { PriorityComponent, SimTagComponent } from '../shared/ui';
           </section>
 
           <section class="glass card">
-            <h2>Prédictions <app-sim-tag /></h2>
+            <h2>Prédictions</h2>
             <dl class="kv">
               <dt>Probabilité d'exploitation (M1)</dt>
-              <dd>{{ d.predictions.m1 ? (d.predictions.m1.probability * 100).toFixed(0) + ' %' : '–' }}<app-sim-tag /></dd>
+              <dd>{{ d.predictions.m1 ? (d.predictions.m1.probability * 100).toFixed(0) + ' %' : '–' }}</dd>
               <dt>Priorité (M2)</dt>
-              <dd><app-priority [value]="d.modelPriority" /><app-sim-tag /></dd>
+              <dd><app-priority [value]="d.modelPriority" /></dd>
               <dt>Probabilité calibrée (M2)</dt>
-              <dd>{{ d.predictions.m2 ? (d.predictions.m2.probability * 100).toFixed(0) + ' %' : '–' }}<app-sim-tag /></dd>
+              <dd>{{ d.predictions.m2 ? (d.predictions.m2.probability * 100).toFixed(0) + ' %' : '–' }}</dd>
               <dt>Fournisseur</dt>
-              <dd>{{ d.predictions.m2?.provider === 'anthropic' ? 'API Claude (simulation)' : 'Règles (simulation)' }} · {{ d.predictions.m2?.version }}</dd>
+              <dd>{{ d.predictions.m2?.provider === 'anthropic' ? 'API Claude' : 'Règles' }} · {{ d.predictions.m2?.version }}</dd>
             </dl>
-            <h3 style="margin:1rem 0 .4rem">Explication <app-sim-tag /></h3>
+            <h3 style="margin:1rem 0 .4rem">Explication</h3>
             @for (c of d.predictions.m2?.explanation ?? []; track c.feature) {
               <div class="contrib">
                 <span>{{ feature(c.feature) }}</span>
