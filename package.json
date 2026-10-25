@@ -1,0 +1,20 @@
+{
+  "name": "projet7-prototype",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Prototype de priorisation intelligente des vulnérabilités (M1/M2 simulés)",
+  "workspaces": ["backend", "frontend"],
+  "engines": { "node": ">=22.12" },
+  "scripts": {
+    "dev:db": "npm run dev:db -w backend",
+    "dev:api": "npm run start:dev -w backend",
+    "dev:web": "npm run start -w frontend",
+    "lint": "npm run lint -w backend && npm run lint -w frontend",
+    "test": "npm run test -w backend && npm run test -w frontend",
+    "test:e2e": "npm run test:e2e -w backend",
+    "build": "npm run build -w frontend && npm run build -w backend",
+    "start": "npm run start:prod -w backend",
+    "db:migrate": "npm run db:deploy -w backend",
+    "db:seed": "npm run db:seed -w backend"
+  }
+}

@@ -1,0 +1,218 @@
+// Modèle de données du prototype (Projet 7).
+// Prisma 7 : l'URL de connexion n'est plus dans ce fichier. Elle est lue dans prisma.config.ts
+// (DIRECT_URL pour les migrations) et dans le code (DATABASE_URL via l'adaptateur pg).
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  ADMIN
+  ANALYST
+  DECISION_MAKER
+}
+
+enum Exposure {
+  PUBLIC
+  INTERNAL
+  RESTRICTED
+}
+
+enum Sensitivity {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum Priority {
+  P1
+  P2
+  P3
+  P4
+}
+
+enum ModelKind {
+  M1
+  M2
+}
+
+enum CorrectionStatus {
+  IMPORTED
+  VALIDATED
+  PRIORITIZED
+  ASSIGNED
+  IN_REMEDIATION
+  REMEDIATED
+  VERIFIED
+  CLOSED
+  REJECTED
+}
+
+enum AuditOutcome {
+  SUCCESS
+  DENIED
+  FAILURE
+}
+
+model User {
+  id                  String         @id @default(uuid())
+  email               String         @unique
+  name                String
+  passwordHash        String
+  role                Role
+  active              Boolean        @default(true)
+  mustChangePassword  Boolean        @default(true)
+  failedLogins        Int            @default(0)
+  lockedUntil         DateTime?
+  // Incrémenté à chaque changement de mot de passe, désactivation ou changement de rôle :
+  // invalide immédiatement les jetons d'accès déjà émis.
+  tokenVersion        Int            @default(0)
+  createdAt           DateTime       @default(now())
+  updatedAt           DateTime       @updatedAt
+  refreshTokens       RefreshToken[]
+  annotations         Annotation[]
+  scans               Scan[]
+  assignedCorrections Correction[]   @relation("assignee")
+}
+
+model RefreshToken {
+  id        String    @id @default(uuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tokenHash String    @unique // SHA-256 du jeton ; le jeton en clair n'est jamais stocké
+  familyId  String // détection de réutilisation (rotation)
+  expiresAt DateTime
+  revokedAt DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([userId])
+  @@index([familyId])
+}
+
+model Application {
+  id          String      @id @default(uuid())
+  name        String      @unique
+  description String?
+  exposure    Exposure
+  sensitivity Sensitivity
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  scans       Scan[]
+  findings    Finding[]
+}
+
+model Scan {
+  id              String      @id @default(uuid())
+  applicationId   String
+  application     Application @relation(fields: [applicationId], references: [id])
+  tool            String      @default("ZAP")
+  fileName        String
+  fileSha256      String
+  sizeBytes       Int
+  rawReport       Json? // conservé seulement si la taille le permet
+  findingsTotal   Int         @default(0)
+  findingsNew     Int         @default(0)
+  findingsUpdated Int         @default(0)
+  status          String      @default("COMPLETED") // PROCESSING | COMPLETED | FAILED
+  importedById    String
+  importedBy      User        @relation(fields: [importedById], references: [id])
+  importedAt      DateTime    @default(now())
+  findings        Finding[]   @relation("firstScan")
+
+  @@unique([applicationId, fileSha256])
+}
+
+model Finding {
+  id             String       @id @default(uuid())
+  applicationId  String
+  application    Application  @relation(fields: [applicationId], references: [id])
+  scanId         String // premier scan où le constat apparaît
+  scan           Scan         @relation("firstScan", fields: [scanId], references: [id])
+  lastSeenScanId String?
+  fingerprint    String // SHA-256(appId | pluginId | cweId | titre)
+  title          String
+  severity       Int // 0 info, 1 faible, 2 moyenne, 3 élevée
+  confidence     String?
+  cweId          Int?
+  cveId          String?
+  description    String // texte brut, jamais de HTML
+  solution       String?
+  instancesCount Int          @default(1)
+  sampleUrls     Json? // 50 URL au maximum
+  firstSeenAt    DateTime     @default(now())
+  lastSeenAt     DateTime     @default(now())
+  // Valeurs dérivées, tenues à jour par le serveur à chaque prédiction ou annotation
+  // (permettent le tri et les agrégats par priorité en SQL).
+  exploitProbability Float? // dernière sortie simulée de M1
+  modelProbability   Float? // dernière probabilité calibrée simulée de M2
+  modelPriority      Priority? // dernière priorité simulée de M2
+  expertPriority     Priority? // dernière annotation d'un expert
+  effectivePriority  Priority? // priorité de l'expert si elle existe, sinon celle de M2
+  predictions    Prediction[]
+  annotations    Annotation[]
+  correction     Correction?
+
+  @@unique([applicationId, fingerprint])
+  @@index([applicationId])
+  @@index([effectivePriority])
+}
+
+model Prediction {
+  id          String    @id @default(uuid())
+  findingId   String
+  finding     Finding   @relation(fields: [findingId], references: [id], onDelete: Cascade)
+  model       ModelKind
+  version     String // ex. "sim-0.1"
+  simulated   Boolean   @default(true) // TOUJOURS vrai tant que les modèles ne sont pas entraînés
+  provider    String // "anthropic" | "rules"
+  probability Float // M1 : probabilité d'exploitation ; M2 : probabilité calibrée
+  priority    Priority? // M2 seulement
+  explanation Json? // M2 : contributions de type SHAP (simulées)
+  createdAt   DateTime  @default(now())
+
+  @@index([findingId, model, createdAt])
+}
+
+model Annotation {
+  id          String   @id @default(uuid())
+  findingId   String
+  finding     Finding  @relation(fields: [findingId], references: [id], onDelete: Cascade)
+  annotatorId String
+  annotator   User     @relation(fields: [annotatorId], references: [id])
+  priority    Priority
+  comment     String?
+  createdAt   DateTime @default(now())
+}
+
+model Correction {
+  id         String           @id @default(uuid())
+  findingId  String           @unique
+  finding    Finding          @relation(fields: [findingId], references: [id], onDelete: Cascade)
+  status     CorrectionStatus @default(IMPORTED)
+  assigneeId String?
+  assignee   User?            @relation("assignee", fields: [assigneeId], references: [id])
+  dueDate    DateTime?
+  comment    String?
+  updatedAt  DateTime         @updatedAt
+}
+
+model AuditLog {
+  id           String       @id @default(uuid())
+  createdAt    DateTime     @default(now())
+  userId       String?
+  action       String // ex. AUTH_LOGIN, SCAN_IMPORT, FINDING_ANNOTATE
+  resourceType String?
+  resourceId   String?
+  outcome      AuditOutcome
+  ip           String?
+  userAgent    String?
+  requestId    String?
+  metadata     Json? // jamais de secret, de mot de passe ni de contenu de rapport
+
+  @@index([createdAt])
+  @@index([userId])
+}

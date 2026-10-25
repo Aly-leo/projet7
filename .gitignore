@@ -1,0 +1,21 @@
+# dépendances et builds
+node_modules/
+dist/
+.angular/
+coverage/
+backend/src/generated/
+# secrets et environnement
+.env
+.env.*
+!.env.example
+# base locale embarquée (développement)
+.pgdata/
+backend/.pgdata/
+# journaux et divers
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+tmp/
+.pgdata-test/

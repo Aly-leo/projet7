@@ -1,0 +1,2724 @@
+{
+  "@programName": "ZAP",
+  "@version": "2.15.0",
+  "@generated": "Sat, 25 Oct 2026 10:00:00",
+  "created": "2026-10-25T10:00:00.000Z",
+  "site": [
+    {
+      "@name": "http://cible-de-labo.test",
+      "alerts": [
+        {
+          "pluginid": "40018",
+          "alertRef": "40018-1",
+          "alert": "SQL Injection",
+          "name": "SQL Injection",
+          "riskcode": "3",
+          "confidence": "1",
+          "riskdesc": "High (Low)",
+          "desc": "<p>Constat synthétique 0.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "1",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "89",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "40012",
+          "alertRef": "40012-1",
+          "alert": "Cross Site Scripting (Reflected)",
+          "name": "Cross Site Scripting (Reflected)",
+          "riskcode": "3",
+          "confidence": "2",
+          "riskdesc": "High (Medium)",
+          "desc": "<p>Constat synthétique 1.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "2",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "79",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "40014",
+          "alertRef": "40014-1",
+          "alert": "Cross Site Scripting (Persistent)",
+          "name": "Cross Site Scripting (Persistent)",
+          "riskcode": "3",
+          "confidence": "3",
+          "riskdesc": "High (High)",
+          "desc": "<p>Constat synthétique 2.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "3",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "79",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "6",
+          "alertRef": "6-1",
+          "alert": "Path Traversal",
+          "name": "Path Traversal",
+          "riskcode": "3",
+          "confidence": "1",
+          "riskdesc": "High (Low)",
+          "desc": "<p>Constat synthétique 3.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "4",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "22",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "90019",
+          "alertRef": "90019-1",
+          "alert": "Server Side Code Injection",
+          "name": "Server Side Code Injection",
+          "riskcode": "3",
+          "confidence": "2",
+          "riskdesc": "High (Medium)",
+          "desc": "<p>Constat synthétique 4.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "5",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "94",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "10202",
+          "alertRef": "10202-1",
+          "alert": "Absence of Anti-CSRF Tokens",
+          "name": "Absence of Anti-CSRF Tokens",
+          "riskcode": "2",
+          "confidence": "3",
+          "riskdesc": "Medium (High)",
+          "desc": "<p>Constat synthétique 5.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "6",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "352",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "10038",
+          "alertRef": "10038-1",
+          "alert": "Content Security Policy (CSP) Header Not Set",
+          "name": "Content Security Policy (CSP) Header Not Set",
+          "riskcode": "2",
+          "confidence": "1",
+          "riskdesc": "Medium (Low)",
+          "desc": "<p>Constat synthétique 6.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "7",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "693",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "10020",
+          "alertRef": "10020-1",
+          "alert": "Missing Anti-clickjacking Header",
+          "name": "Missing Anti-clickjacking Header",
+          "riskcode": "2",
+          "confidence": "2",
+          "riskdesc": "Medium (Medium)",
+          "desc": "<p>Constat synthétique 7.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "1",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "1021",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "90033",
+          "alertRef": "90033-1",
+          "alert": "Loosely Scoped Cookie",
+          "name": "Loosely Scoped Cookie",
+          "riskcode": "1",
+          "confidence": "3",
+          "riskdesc": "Low (High)",
+          "desc": "<p>Constat synthétique 8.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "2",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "565",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "10021",
+          "alertRef": "10021-1",
+          "alert": "X-Content-Type-Options Header Missing",
+          "name": "X-Content-Type-Options Header Missing",
+          "riskcode": "1",
+          "confidence": "1",
+          "riskdesc": "Low (Low)",
+          "desc": "<p>Constat synthétique 9.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "3",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "693",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "10063",
+          "alertRef": "10063-1",
+          "alert": "Permissions Policy Header Not Set",
+          "name": "Permissions Policy Header Not Set",
+          "riskcode": "1",
+          "confidence": "2",
+          "riskdesc": "Low (Medium)",
+          "desc": "<p>Constat synthétique 10.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "4",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "693",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "10096",
+          "alertRef": "10096-1",
+          "alert": "Timestamp Disclosure - Unix",
+          "name": "Timestamp Disclosure - Unix",
+          "riskcode": "0",
+          "confidence": "3",
+          "riskdesc": "Informational (High)",
+          "desc": "<p>Constat synthétique 11.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "5",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "200",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "40018",
+          "alertRef": "40018-1",
+          "alert": "SQL Injection",
+          "name": "SQL Injection",
+          "riskcode": "3",
+          "confidence": "1",
+          "riskdesc": "High (Low)",
+          "desc": "<p>Constat synthétique 12.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "6",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "89",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "40012",
+          "alertRef": "40012-1",
+          "alert": "Cross Site Scripting (Reflected)",
+          "name": "Cross Site Scripting (Reflected)",
+          "riskcode": "3",
+          "confidence": "2",
+          "riskdesc": "High (Medium)",
+          "desc": "<p>Constat synthétique 13.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "7",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "79",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "40014",
+          "alertRef": "40014-1",
+          "alert": "Cross Site Scripting (Persistent)",
+          "name": "Cross Site Scripting (Persistent)",
+          "riskcode": "3",
+          "confidence": "3",
+          "riskdesc": "High (High)",
+          "desc": "<p>Constat synthétique 14.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "1",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "79",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "6",
+          "alertRef": "6-1",
+          "alert": "Path Traversal",
+          "name": "Path Traversal",
+          "riskcode": "3",
+          "confidence": "1",
+          "riskdesc": "High (Low)",
+          "desc": "<p>Constat synthétique 15.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "2",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "22",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "90019",
+          "alertRef": "90019-1",
+          "alert": "Server Side Code Injection",
+          "name": "Server Side Code Injection",
+          "riskcode": "3",
+          "confidence": "2",
+          "riskdesc": "High (Medium)",
+          "desc": "<p>Constat synthétique 16.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "3",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "94",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "10202",
+          "alertRef": "10202-1",
+          "alert": "Absence of Anti-CSRF Tokens",
+          "name": "Absence of Anti-CSRF Tokens",
+          "riskcode": "2",
+          "confidence": "3",
+          "riskdesc": "Medium (High)",
+          "desc": "<p>Constat synthétique 17.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "4",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "352",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "10038",
+          "alertRef": "10038-1",
+          "alert": "Content Security Policy (CSP) Header Not Set",
+          "name": "Content Security Policy (CSP) Header Not Set",
+          "riskcode": "2",
+          "confidence": "1",
+          "riskdesc": "Medium (Low)",
+          "desc": "<p>Constat synthétique 18.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "5",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "693",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "10020",
+          "alertRef": "10020-1",
+          "alert": "Missing Anti-clickjacking Header",
+          "name": "Missing Anti-clickjacking Header",
+          "riskcode": "2",
+          "confidence": "2",
+          "riskdesc": "Medium (Medium)",
+          "desc": "<p>Constat synthétique 19.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "6",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "1021",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "90033",
+          "alertRef": "90033-1",
+          "alert": "Loosely Scoped Cookie",
+          "name": "Loosely Scoped Cookie",
+          "riskcode": "1",
+          "confidence": "3",
+          "riskdesc": "Low (High)",
+          "desc": "<p>Constat synthétique 20.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "7",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "565",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "10021",
+          "alertRef": "10021-1",
+          "alert": "X-Content-Type-Options Header Missing",
+          "name": "X-Content-Type-Options Header Missing",
+          "riskcode": "1",
+          "confidence": "1",
+          "riskdesc": "Low (Low)",
+          "desc": "<p>Constat synthétique 21.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "1",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "693",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "10063",
+          "alertRef": "10063-1",
+          "alert": "Permissions Policy Header Not Set",
+          "name": "Permissions Policy Header Not Set",
+          "riskcode": "1",
+          "confidence": "2",
+          "riskdesc": "Low (Medium)",
+          "desc": "<p>Constat synthétique 22.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "2",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "693",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "10096",
+          "alertRef": "10096-1",
+          "alert": "Timestamp Disclosure - Unix",
+          "name": "Timestamp Disclosure - Unix",
+          "riskcode": "0",
+          "confidence": "3",
+          "riskdesc": "Informational (High)",
+          "desc": "<p>Constat synthétique 23.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "3",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "200",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "40018",
+          "alertRef": "40018-1",
+          "alert": "SQL Injection (page 2)",
+          "name": "SQL Injection (page 2)",
+          "riskcode": "3",
+          "confidence": "1",
+          "riskdesc": "High (Low)",
+          "desc": "<p>Constat synthétique 24.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "4",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "89",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "40012",
+          "alertRef": "40012-1",
+          "alert": "Cross Site Scripting (Reflected) (page 2)",
+          "name": "Cross Site Scripting (Reflected) (page 2)",
+          "riskcode": "3",
+          "confidence": "2",
+          "riskdesc": "High (Medium)",
+          "desc": "<p>Constat synthétique 25.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "5",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "79",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "40014",
+          "alertRef": "40014-1",
+          "alert": "Cross Site Scripting (Persistent) (page 2)",
+          "name": "Cross Site Scripting (Persistent) (page 2)",
+          "riskcode": "3",
+          "confidence": "3",
+          "riskdesc": "High (High)",
+          "desc": "<p>Constat synthétique 26.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "6",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "79",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "6",
+          "alertRef": "6-1",
+          "alert": "Path Traversal (page 2)",
+          "name": "Path Traversal (page 2)",
+          "riskcode": "3",
+          "confidence": "1",
+          "riskdesc": "High (Low)",
+          "desc": "<p>Constat synthétique 27.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "7",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "22",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "90019",
+          "alertRef": "90019-1",
+          "alert": "Server Side Code Injection (page 2)",
+          "name": "Server Side Code Injection (page 2)",
+          "riskcode": "3",
+          "confidence": "2",
+          "riskdesc": "High (Medium)",
+          "desc": "<p>Constat synthétique 28.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "1",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "94",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "10202",
+          "alertRef": "10202-1",
+          "alert": "Absence of Anti-CSRF Tokens (page 2)",
+          "name": "Absence of Anti-CSRF Tokens (page 2)",
+          "riskcode": "2",
+          "confidence": "3",
+          "riskdesc": "Medium (High)",
+          "desc": "<p>Constat synthétique 29.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "2",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "352",
+          "wascid": "15",
+          "sourceid": "3"
+        }
+      ]
+    },
+    {
+      "@name": "https://cible-de-labo.test",
+      "alerts": [
+        {
+          "pluginid": "90033",
+          "alertRef": "90033-1",
+          "alert": "Loosely Scoped Cookie",
+          "name": "Loosely Scoped Cookie",
+          "riskcode": "1",
+          "confidence": "3",
+          "riskdesc": "Low (High)",
+          "desc": "<p>Constat synthétique 20.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "7",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "565",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "10021",
+          "alertRef": "10021-1",
+          "alert": "X-Content-Type-Options Header Missing",
+          "name": "X-Content-Type-Options Header Missing",
+          "riskcode": "1",
+          "confidence": "1",
+          "riskdesc": "Low (Low)",
+          "desc": "<p>Constat synthétique 21.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "1",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "693",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "10063",
+          "alertRef": "10063-1",
+          "alert": "Permissions Policy Header Not Set",
+          "name": "Permissions Policy Header Not Set",
+          "riskcode": "1",
+          "confidence": "2",
+          "riskdesc": "Low (Medium)",
+          "desc": "<p>Constat synthétique 22.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "2",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "693",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "10096",
+          "alertRef": "10096-1",
+          "alert": "Timestamp Disclosure - Unix",
+          "name": "Timestamp Disclosure - Unix",
+          "riskcode": "0",
+          "confidence": "3",
+          "riskdesc": "Informational (High)",
+          "desc": "<p>Constat synthétique 23.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "3",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "200",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "40018",
+          "alertRef": "40018-1",
+          "alert": "SQL Injection (page 2)",
+          "name": "SQL Injection (page 2)",
+          "riskcode": "3",
+          "confidence": "1",
+          "riskdesc": "High (Low)",
+          "desc": "<p>Constat synthétique 24.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "4",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "89",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "40012",
+          "alertRef": "40012-1",
+          "alert": "Cross Site Scripting (Reflected) (page 2)",
+          "name": "Cross Site Scripting (Reflected) (page 2)",
+          "riskcode": "3",
+          "confidence": "2",
+          "riskdesc": "High (Medium)",
+          "desc": "<p>Constat synthétique 25.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "5",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "79",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "40014",
+          "alertRef": "40014-1",
+          "alert": "Cross Site Scripting (Persistent) (page 2)",
+          "name": "Cross Site Scripting (Persistent) (page 2)",
+          "riskcode": "3",
+          "confidence": "3",
+          "riskdesc": "High (High)",
+          "desc": "<p>Constat synthétique 26.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "6",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "79",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "6",
+          "alertRef": "6-1",
+          "alert": "Path Traversal (page 2)",
+          "name": "Path Traversal (page 2)",
+          "riskcode": "3",
+          "confidence": "1",
+          "riskdesc": "High (Low)",
+          "desc": "<p>Constat synthétique 27.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "7",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "22",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "90019",
+          "alertRef": "90019-1",
+          "alert": "Server Side Code Injection (page 2)",
+          "name": "Server Side Code Injection (page 2)",
+          "riskcode": "3",
+          "confidence": "2",
+          "riskdesc": "High (Medium)",
+          "desc": "<p>Constat synthétique 28.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "1",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "94",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "10202",
+          "alertRef": "10202-1",
+          "alert": "Absence of Anti-CSRF Tokens (page 2)",
+          "name": "Absence of Anti-CSRF Tokens (page 2)",
+          "riskcode": "2",
+          "confidence": "3",
+          "riskdesc": "Medium (High)",
+          "desc": "<p>Constat synthétique 29.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "2",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "352",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "10038",
+          "alertRef": "10038-1",
+          "alert": "Content Security Policy (CSP) Header Not Set (page 2)",
+          "name": "Content Security Policy (CSP) Header Not Set (page 2)",
+          "riskcode": "2",
+          "confidence": "1",
+          "riskdesc": "Medium (Low)",
+          "desc": "<p>Constat synthétique 30.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "3",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "693",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "10020",
+          "alertRef": "10020-1",
+          "alert": "Missing Anti-clickjacking Header (page 2)",
+          "name": "Missing Anti-clickjacking Header (page 2)",
+          "riskcode": "2",
+          "confidence": "2",
+          "riskdesc": "Medium (Medium)",
+          "desc": "<p>Constat synthétique 31.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "4",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "1021",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "90033",
+          "alertRef": "90033-1",
+          "alert": "Loosely Scoped Cookie (page 2)",
+          "name": "Loosely Scoped Cookie (page 2)",
+          "riskcode": "1",
+          "confidence": "3",
+          "riskdesc": "Low (High)",
+          "desc": "<p>Constat synthétique 32.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "5",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "565",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "10021",
+          "alertRef": "10021-1",
+          "alert": "X-Content-Type-Options Header Missing (page 2)",
+          "name": "X-Content-Type-Options Header Missing (page 2)",
+          "riskcode": "1",
+          "confidence": "1",
+          "riskdesc": "Low (Low)",
+          "desc": "<p>Constat synthétique 33.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "6",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "693",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "10063",
+          "alertRef": "10063-1",
+          "alert": "Permissions Policy Header Not Set (page 2)",
+          "name": "Permissions Policy Header Not Set (page 2)",
+          "riskcode": "1",
+          "confidence": "2",
+          "riskdesc": "Low (Medium)",
+          "desc": "<p>Constat synthétique 34.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "7",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "693",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "10096",
+          "alertRef": "10096-1",
+          "alert": "Timestamp Disclosure - Unix (page 2)",
+          "name": "Timestamp Disclosure - Unix (page 2)",
+          "riskcode": "0",
+          "confidence": "3",
+          "riskdesc": "Informational (High)",
+          "desc": "<p>Constat synthétique 35.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "1",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "200",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "40018",
+          "alertRef": "40018-1",
+          "alert": "SQL Injection (page 3)",
+          "name": "SQL Injection (page 3)",
+          "riskcode": "3",
+          "confidence": "1",
+          "riskdesc": "High (Low)",
+          "desc": "<p>Constat synthétique 36.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "2",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "89",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "40012",
+          "alertRef": "40012-1",
+          "alert": "Cross Site Scripting (Reflected) (page 3)",
+          "name": "Cross Site Scripting (Reflected) (page 3)",
+          "riskcode": "3",
+          "confidence": "2",
+          "riskdesc": "High (Medium)",
+          "desc": "<p>Constat synthétique 37.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "3",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "79",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "40014",
+          "alertRef": "40014-1",
+          "alert": "Cross Site Scripting (Persistent) (page 3)",
+          "name": "Cross Site Scripting (Persistent) (page 3)",
+          "riskcode": "3",
+          "confidence": "3",
+          "riskdesc": "High (High)",
+          "desc": "<p>Constat synthétique 38.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "4",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "79",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "6",
+          "alertRef": "6-1",
+          "alert": "Path Traversal (page 3)",
+          "name": "Path Traversal (page 3)",
+          "riskcode": "3",
+          "confidence": "1",
+          "riskdesc": "High (Low)",
+          "desc": "<p>Constat synthétique 39.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "5",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "22",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "90019",
+          "alertRef": "90019-1",
+          "alert": "Server Side Code Injection (page 3)",
+          "name": "Server Side Code Injection (page 3)",
+          "riskcode": "3",
+          "confidence": "2",
+          "riskdesc": "High (Medium)",
+          "desc": "<p>Constat synthétique 40.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "6",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "94",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "10202",
+          "alertRef": "10202-1",
+          "alert": "Absence of Anti-CSRF Tokens (page 3)",
+          "name": "Absence of Anti-CSRF Tokens (page 3)",
+          "riskcode": "2",
+          "confidence": "3",
+          "riskdesc": "Medium (High)",
+          "desc": "<p>Constat synthétique 41.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "7",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "352",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "10038",
+          "alertRef": "10038-1",
+          "alert": "Content Security Policy (CSP) Header Not Set (page 3)",
+          "name": "Content Security Policy (CSP) Header Not Set (page 3)",
+          "riskcode": "2",
+          "confidence": "1",
+          "riskdesc": "Medium (Low)",
+          "desc": "<p>Constat synthétique 42.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "1",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "693",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "10020",
+          "alertRef": "10020-1",
+          "alert": "Missing Anti-clickjacking Header (page 3)",
+          "name": "Missing Anti-clickjacking Header (page 3)",
+          "riskcode": "2",
+          "confidence": "2",
+          "riskdesc": "Medium (Medium)",
+          "desc": "<p>Constat synthétique 43.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "2",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "1021",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "90033",
+          "alertRef": "90033-1",
+          "alert": "Loosely Scoped Cookie (page 3)",
+          "name": "Loosely Scoped Cookie (page 3)",
+          "riskcode": "1",
+          "confidence": "3",
+          "riskdesc": "Low (High)",
+          "desc": "<p>Constat synthétique 44.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "3",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "565",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "10021",
+          "alertRef": "10021-1",
+          "alert": "X-Content-Type-Options Header Missing (page 3)",
+          "name": "X-Content-Type-Options Header Missing (page 3)",
+          "riskcode": "1",
+          "confidence": "1",
+          "riskdesc": "Low (Low)",
+          "desc": "<p>Constat synthétique 45.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "4",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "693",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "10063",
+          "alertRef": "10063-1",
+          "alert": "Permissions Policy Header Not Set (page 3)",
+          "name": "Permissions Policy Header Not Set (page 3)",
+          "riskcode": "1",
+          "confidence": "2",
+          "riskdesc": "Low (Medium)",
+          "desc": "<p>Constat synthétique 46.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "5",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "693",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "10096",
+          "alertRef": "10096-1",
+          "alert": "Timestamp Disclosure - Unix (page 3)",
+          "name": "Timestamp Disclosure - Unix (page 3)",
+          "riskcode": "0",
+          "confidence": "3",
+          "riskdesc": "Informational (High)",
+          "desc": "<p>Constat synthétique 47.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "6",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "200",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "40018",
+          "alertRef": "40018-1",
+          "alert": "SQL Injection (page 4)",
+          "name": "SQL Injection (page 4)",
+          "riskcode": "3",
+          "confidence": "1",
+          "riskdesc": "High (Low)",
+          "desc": "<p>Constat synthétique 48.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "7",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "89",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "40012",
+          "alertRef": "40012-1",
+          "alert": "Cross Site Scripting (Reflected) (page 4)",
+          "name": "Cross Site Scripting (Reflected) (page 4)",
+          "riskcode": "3",
+          "confidence": "2",
+          "riskdesc": "High (Medium)",
+          "desc": "<p>Constat synthétique 49.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "1",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "79",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "40014",
+          "alertRef": "40014-1",
+          "alert": "Cross Site Scripting (Persistent) (page 4)",
+          "name": "Cross Site Scripting (Persistent) (page 4)",
+          "riskcode": "3",
+          "confidence": "3",
+          "riskdesc": "High (High)",
+          "desc": "<p>Constat synthétique 50.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "2",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "79",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "6",
+          "alertRef": "6-1",
+          "alert": "Path Traversal (page 4)",
+          "name": "Path Traversal (page 4)",
+          "riskcode": "3",
+          "confidence": "1",
+          "riskdesc": "High (Low)",
+          "desc": "<p>Constat synthétique 51.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "3",
+          "solution": "<p>Corriger selon les bonnes pratiques OWASP.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "22",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "60000",
+          "alertRef": "60000-1",
+          "alert": "Constat synthétique unique 0",
+          "name": "Constat synthétique unique 0",
+          "riskcode": "0",
+          "confidence": "2",
+          "riskdesc": "Informational (Medium)",
+          "desc": "<p>Constat unique de démonstration.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "2",
+          "solution": "<p>À analyser.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "20",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "60001",
+          "alertRef": "60001-1",
+          "alert": "Constat synthétique unique 1",
+          "name": "Constat synthétique unique 1",
+          "riskcode": "1",
+          "confidence": "2",
+          "riskdesc": "Low (Medium)",
+          "desc": "<p>Constat unique de démonstration.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "2",
+          "solution": "<p>À analyser.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "-1",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "60002",
+          "alertRef": "60002-1",
+          "alert": "Constat synthétique unique 2",
+          "name": "Constat synthétique unique 2",
+          "riskcode": "2",
+          "confidence": "2",
+          "riskdesc": "Medium (Medium)",
+          "desc": "<p>Constat unique de démonstration.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "2",
+          "solution": "<p>À analyser.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "22",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "60003",
+          "alertRef": "60003-1",
+          "alert": "Constat synthétique unique 3",
+          "name": "Constat synthétique unique 3",
+          "riskcode": "3",
+          "confidence": "2",
+          "riskdesc": "High (Medium)",
+          "desc": "<p>Constat unique de démonstration.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "2",
+          "solution": "<p>À analyser.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "-1",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "60004",
+          "alertRef": "60004-1",
+          "alert": "Constat synthétique unique 4",
+          "name": "Constat synthétique unique 4",
+          "riskcode": "0",
+          "confidence": "2",
+          "riskdesc": "Informational (Medium)",
+          "desc": "<p>Constat unique de démonstration.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "2",
+          "solution": "<p>À analyser.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "24",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "60005",
+          "alertRef": "60005-1",
+          "alert": "Constat synthétique unique 5",
+          "name": "Constat synthétique unique 5",
+          "riskcode": "1",
+          "confidence": "2",
+          "riskdesc": "Low (Medium)",
+          "desc": "<p>Constat unique de démonstration.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "2",
+          "solution": "<p>À analyser.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "-1",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "60006",
+          "alertRef": "60006-1",
+          "alert": "Constat synthétique unique 6",
+          "name": "Constat synthétique unique 6",
+          "riskcode": "2",
+          "confidence": "2",
+          "riskdesc": "Medium (Medium)",
+          "desc": "<p>Constat unique de démonstration.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "2",
+          "solution": "<p>À analyser.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "26",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "60007",
+          "alertRef": "60007-1",
+          "alert": "Constat synthétique unique 7",
+          "name": "Constat synthétique unique 7",
+          "riskcode": "3",
+          "confidence": "2",
+          "riskdesc": "High (Medium)",
+          "desc": "<p>Constat unique de démonstration.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "2",
+          "solution": "<p>À analyser.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "-1",
+          "wascid": "15",
+          "sourceid": "3"
+        }
+      ]
+    }
+  ]
+}

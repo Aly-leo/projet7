@@ -1,0 +1,422 @@
+{
+  "@programName": "ZAP",
+  "@version": "2.15.0",
+  "@generated": "Sat, 25 Oct 2026 10:00:00",
+  "created": "2026-10-25T10:00:00.000Z",
+  "site": [
+    {
+      "@name": "http://cible-de-labo.test",
+      "@host": "cible-de-labo.test",
+      "@port": "80",
+      "@ssl": "false",
+      "alerts": [
+        {
+          "pluginid": "40018",
+          "alertRef": "40018-1",
+          "alert": "SQL Injection",
+          "name": "SQL Injection",
+          "riskcode": "3",
+          "confidence": "3",
+          "riskdesc": "High (High)",
+          "desc": "<p>Une injection SQL peut être possible via le paramètre q.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "4",
+          "solution": "<p>Utiliser des requêtes paramétrées.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "89",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "40012",
+          "alertRef": "40012-1",
+          "alert": "Cross Site Scripting (Reflected)",
+          "name": "Cross Site Scripting (Reflected)",
+          "riskcode": "3",
+          "confidence": "2",
+          "riskdesc": "High (Medium)",
+          "desc": "<p>XSS réfléchi détecté.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "6",
+          "solution": "<p>Encoder les sorties et valider les entrées.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "79",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "10038",
+          "alertRef": "10038-1",
+          "alert": "Content Security Policy (CSP) Header Not Set",
+          "name": "Content Security Policy (CSP) Header Not Set",
+          "riskcode": "2",
+          "confidence": "3",
+          "riskdesc": "Medium (High)",
+          "desc": "<p>L'en-tête CSP est absent.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "25",
+          "solution": "<p>Configurer une politique CSP stricte.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "693",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "10020",
+          "alertRef": "10020-1",
+          "alert": "Missing Anti-clickjacking Header",
+          "name": "Missing Anti-clickjacking Header",
+          "riskcode": "2",
+          "confidence": "2",
+          "riskdesc": "Medium (Medium)",
+          "desc": "<p>Aucun en-tête X-Frame-Options ni frame-ancestors.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "12",
+          "solution": "<p>Ajouter l'en-tête X-Frame-Options ou frame-ancestors.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "1021",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "10021",
+          "alertRef": "10021-1",
+          "alert": "X-Content-Type-Options Header Missing",
+          "name": "X-Content-Type-Options Header Missing",
+          "riskcode": "1",
+          "confidence": "2",
+          "riskdesc": "Low (Medium)",
+          "desc": "<p>En-tête X-Content-Type-Options absent.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "30",
+          "solution": "<p>Définir nosniff.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "693",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "10010",
+          "alertRef": "10010-1",
+          "alert": "Cookie No HttpOnly Flag",
+          "name": "Cookie No HttpOnly Flag",
+          "riskcode": "1",
+          "confidence": "3",
+          "riskdesc": "Low (High)",
+          "desc": "<p>Un cookie est accessible au JavaScript.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "3",
+          "solution": "<p>Positionner l'attribut HttpOnly.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "1004",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "10054",
+          "alertRef": "10054-1",
+          "alert": "Cookie without SameSite Attribute",
+          "name": "Cookie without SameSite Attribute",
+          "riskcode": "1",
+          "confidence": "3",
+          "riskdesc": "Low (High)",
+          "desc": "<p>Un cookie sans attribut SameSite.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "3",
+          "solution": "<p>Positionner SameSite=Strict.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "1275",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "10096",
+          "alertRef": "10096-1",
+          "alert": "Timestamp Disclosure - Unix",
+          "name": "Timestamp Disclosure - Unix",
+          "riskcode": "0",
+          "confidence": "1",
+          "riskdesc": "Informational (Low)",
+          "desc": "<p>Un horodatage Unix est exposé.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=2",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "8",
+          "solution": "<p>Vérifier que les horodatages ne sont pas sensibles.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "200",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "10109",
+          "alertRef": "10109-1",
+          "alert": "Modern Web Application",
+          "name": "Modern Web Application",
+          "riskcode": "0",
+          "confidence": "2",
+          "riskdesc": "Informational (Medium)",
+          "desc": "<p>Application web moderne détectée.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "1",
+          "solution": "<p>Aucune action requise.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "-1",
+          "wascid": "15",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "90022",
+          "alertRef": "90022-1",
+          "alert": "Application Error Disclosure",
+          "name": "Application Error Disclosure",
+          "riskcode": "2",
+          "confidence": "2",
+          "riskdesc": "Medium (Medium)",
+          "desc": "<p>Un message d'erreur détaillé est affiché.</p>",
+          "instances": [
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=0",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            },
+            {
+              "uri": "http://cible-de-labo.test/rest/products/search?q=1",
+              "method": "GET",
+              "param": "q",
+              "attack": "",
+              "evidence": "",
+              "otherinfo": ""
+            }
+          ],
+          "count": "2",
+          "solution": "<p>Afficher des erreurs génériques.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://owasp.org/</p>",
+          "cweid": "0",
+          "wascid": "15",
+          "sourceid": "3"
+        }
+      ]
+    }
+  ]
+}

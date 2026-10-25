@@ -1,0 +1,16 @@
+{
+  "site": [
+    {
+      "alerts": [
+        {
+          "alert": "Sans identifiant",
+          "riskcode": "très grave",
+          "cweid": {
+            "a": 1
+          },
+          "instances": "non"
+        }
+      ]
+    }
+  ]
+}
