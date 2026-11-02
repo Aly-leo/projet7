@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { authGuard, guestGuard, installationGuard, roleGuard } from './core/guards';
+import { authGuard, guestGuard, installationGuard, landingGuard, roleGuard } from './core/guards';
 import { ShellComponent } from './shared/shell.component';
 
 const STAFF = ['ADMIN', 'ANALYST'] as const;
@@ -9,6 +9,13 @@ export const routes: Routes = [
     path: '',
     canActivateChild: [installationGuard],
     children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        canActivate: [landingGuard],
+        loadComponent: () => import('./features/landing.page').then((m) => m.LandingPage),
+        title: 'Priorisation des vulnérabilités',
+      },
       {
         path: 'installation',
         loadComponent: () => import('./features/install.page').then((m) => m.InstallPage),
@@ -31,7 +38,6 @@ export const routes: Routes = [
         component: ShellComponent,
         canActivate: [authGuard],
         children: [
-          { path: '', pathMatch: 'full', redirectTo: 'tableau-de-bord' },
           { path: 'tableau-de-bord', loadComponent: () => import('./features/dashboard.page').then((m) => m.DashboardPage), title: 'Tableau de bord' },
           { path: 'import', canActivate: [roleGuard(...STAFF)], loadComponent: () => import('./features/import.page').then((m) => m.ImportPage), title: 'Importer un scan' },
           { path: 'constats', canActivate: [roleGuard(...STAFF)], loadComponent: () => import('./features/findings.page').then((m) => m.FindingsPage), title: 'Constats' },

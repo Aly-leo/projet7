@@ -47,7 +47,11 @@ export const httpInterceptor: HttpInterceptorFn = (req, next) => {
           const hadSession = auth.user() !== null;
           auth.clear();
           if (hadSession) toast.error('Votre session a expiré. Veuillez vous reconnecter.');
-          if (!router.url.startsWith('/connexion') && !router.url.startsWith('/installation')) router.navigateByUrl('/connexion');
+          // La vérification de session initiale (/auth/moi) ne redirige pas : les gardes de routes décident
+          // (la page d'accueil publique reste accessible sans connexion).
+          const probe = req.url.endsWith('/auth/moi');
+          const publicPage = ['/connexion', '/installation'].some((p) => router.url.startsWith(p)) || router.url === '/';
+          if (!probe && !publicPage) router.navigateByUrl('/connexion');
           return throwError(() => err);
         }),
       );

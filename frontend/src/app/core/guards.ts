@@ -50,6 +50,16 @@ export const roleGuard =
     return role && roles.includes(role) ? true : router.createUrlTree(['/403']);
   };
 
+/** Page d'accueil publique : une personne déjà connectée est envoyée directement au tableau de bord. */
+export const landingGuard: CanActivateFn = async () => {
+  const auth = inject(AuthService);
+  const router = inject(Router);
+  await auth.load();
+  const user = auth.user();
+  if (!user) return true;
+  return router.createUrlTree([user.mustChangePassword ? '/changer-mot-de-passe' : '/tableau-de-bord']);
+};
+
 export const guestGuard: CanActivateFn = async () => {
   const auth = inject(AuthService);
   const router = inject(Router);
