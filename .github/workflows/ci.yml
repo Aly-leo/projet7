@@ -8,6 +8,7 @@ on:
 permissions:
   contents: read
 
+# L'analyse CodeQL est activée dans Settings > Code security (configuration par défaut).
 jobs:
   build-test:
     runs-on: ubuntu-latest
@@ -44,19 +45,6 @@ jobs:
           DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres
       - name: Audit des dépendances
         run: npm audit --audit-level=high
-
-  codeql:
-    runs-on: ubuntu-latest
-    permissions:
-      security-events: write
-      contents: read
-      actions: read
-    steps:
-      - uses: actions/checkout@v4
-      - uses: github/codeql-action/init@v3
-        with:
-          languages: javascript-typescript
-      - uses: github/codeql-action/analyze@v3
 
   secrets:
     runs-on: ubuntu-latest
