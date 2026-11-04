@@ -1,9 +1,10 @@
+import { randomBytes } from 'node:crypto';
 import { createServer, type Server } from 'node:http';
 import type { AddressInfo } from 'node:net';
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest';
 import { as, createTestApp, fixture, installAdmin, type Session, type TestContext } from './helpers.js';
 
-const TOKEN = 'jeton-de-service-m1-0123456789';
+const TOKEN = randomBytes(16).toString('hex'); // généré à chaque exécution : aucun secret en clair dans le dépôt
 
 describe('M1 entraîné (service d\'inférence) et repli sur la simulation', () => {
   let ctx: TestContext;

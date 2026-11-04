@@ -1,0 +1,13 @@
+title = "Projet 7 : règles gitleaks"
+
+[extend]
+useDefault = true
+
+# Deux jetons de TEST fictifs, sans valeur, écrits en clair dans des tests puis remplacés par des valeurs générées à l'exécution.
+# Ils restent dans l'historique Git : on les autorise par valeur exacte, sans désactiver aucune règle ni aucun dossier.
+[allowlist]
+description = "Jetons de test fictifs (historique)"
+regexes = [
+  '''jeton-de-service-m1-0123456789''',
+  '''jeton-de-test-0123456789''',
+]

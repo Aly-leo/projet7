@@ -1,12 +1,13 @@
 """Bon fonctionnement du code d'entraînement, d'évaluation, d'explication et du service, sur données SYNTHÉTIQUES."""
 import json
+import secrets
 
 import pytest
 from fastapi.testclient import TestClient
 
 from m1.service.app import MAX_BATCH, create_app
 
-TOKEN = "jeton-de-test-0123456789"
+TOKEN = secrets.token_hex(16)  # généré à chaque exécution : aucun secret en clair dans le dépôt
 
 
 def test_artefacts_et_metriques(syn_model_dir):
