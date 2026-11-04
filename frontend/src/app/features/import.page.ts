@@ -65,6 +65,11 @@ const MAX_MB = 10;
             <div><div class="muted">Mis à jour</div><strong style="font-size:1.6rem">{{ r.findingsUpdated }}</strong></div>
             <div><div class="muted">M1</div><strong style="font-size:1.1rem">{{ r.m1Provider === 'm1-trained' ? 'V1' : r.m1Provider === 'mixed' ? 'V1 et repli' : 'Estimation de repli' }}</strong></div>
           </div>
+          <p style="margin:0 0 .8rem">
+            <span class="muted">Priorités (M2) calculées par :</span>
+            <strong>{{ m2Origin(r) }}</strong>
+            @if (r.m2Fallback) { <span class="badge bad" style="margin-left:.5rem">Repli : l'API Claude n'a pas répondu pour tout ou partie des constats</span> }
+          </p>
           <div class="prio">
             @for (p of priorities; track p) { <span class="badge" [class]="p">{{ p }} · {{ label(p) }} : {{ r.byPriority[p] }}</span> }
           </div>
@@ -100,6 +105,13 @@ export class ImportPage {
   }
 
   protected label(p: Priority): string { return PRIORITY_LABEL[p]; }
+
+  /** Origine réelle des priorités de M2 pour cet import (M2 n'est pas entraîné : sortie simulée par l'API Claude ou par des règles). */
+  protected m2Origin(r: ImportSummary): string {
+    if (r.provider === 'anthropic') return 'API Claude (simulé)';
+    if (r.provider === 'mixed') return 'API Claude et règles (simulé)';
+    return 'règles déterministes (simulé)';
+  }
 
   protected onFile(e: Event): void {
     this.accept((e.target as HTMLInputElement).files?.[0] ?? null);

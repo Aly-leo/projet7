@@ -129,7 +129,7 @@ export class ScansService {
         summary = await this.predictions.predictFindings(result.newIds, ctx);
       } catch (err) {
         this.logger.error(`Prédictions impossibles : ${(err as Error).message}`);
-        summary = { total: 0, provider: 'rules' as const, m1Provider: 'rules' as const, fallback: true, byPriority: { P1: 0, P2: 0, P3: 0, P4: 0 } };
+        summary = { total: 0, provider: 'rules' as const, m1Provider: 'rules' as const, fallback: true, m2Fallback: false, byPriority: { P1: 0, P2: 0, P3: 0, P4: 0 } };
       }
 
       const response = {
@@ -140,6 +140,7 @@ export class ScansService {
         byPriority: summary.byPriority,
         provider: summary.provider,
         m1Provider: summary.m1Provider,
+        m2Fallback: summary.m2Fallback,
         simulated: true,
       };
       await this.audit.log(ctx, {

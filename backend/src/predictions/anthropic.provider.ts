@@ -94,7 +94,8 @@ export class AnthropicSimulatedProvider implements PredictionProvider {
         const res = await this.client.messages.create({
           model: this.model,
           max_tokens: 4096,
-          temperature: 0,
+          // Aucun paramètre d'échantillonnage (temperature, top_p, top_k) : les modèles récents les refusent (HTTP 400
+          // « Extra inputs are not permitted »), ce qui avait fait retomber silencieusement M2 sur les règles en production.
           system: SYSTEM_PROMPT,
           messages: [
             {

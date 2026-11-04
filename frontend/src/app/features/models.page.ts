@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { ApiService, errorMessage } from '../core/api.service';
 import { ModelState } from '../core/models';
@@ -7,7 +8,7 @@ import { IconComponent } from '../shared/ui';
 @Component({
   selector: 'app-models',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [IconComponent],
+  imports: [DatePipe, IconComponent],
   template: `
     <div class="page">
       <div class="page-header"><div><h1>Modèles</h1><p>M1 (exploitabilité) et M2 (priorité contextuelle).</p></div></div>
@@ -31,6 +32,17 @@ import { IconComponent } from '../shared/ui';
             <dt>Fournisseur M2 configuré</dt><dd>{{ s.configuredProvider === 'anthropic' ? 'API Claude' : 'Règles déterministes' }}</dd>
             <dt>Fournisseur M2 actif</dt><dd>{{ s.activeProvider === 'anthropic' ? 'API Claude' : 'Règles déterministes' }}</dd>
             <dt>Clé d'API</dt><dd>{{ s.anthropicConfigured ? 'Configurée côté serveur' : 'Non configurée' }}</dd>
+            @if (s.configuredProvider === 'anthropic') {
+              <dt>Dernier appel à l'API Claude</dt>
+              <dd>
+                @if (s.lastLlmRun; as run) {
+                  @if (run.outcome === 'SUCCESS') { <span class="badge ok">Réussi</span> } @else { <span class="badge bad">Échec : repli sur les règles</span> }
+                  <span class="muted" style="margin-left:.6rem">{{ run.at | date: 'dd/MM/yyyy HH:mm' }}</span>
+                } @else {
+                  <span class="muted">Aucun appel enregistré</span>
+                }
+              </dd>
+            }
           </dl>
           <div class="row" style="margin-top:1.1rem">
             <button class="btn primary" type="button" (click)="rerun()" [disabled]="busy()">

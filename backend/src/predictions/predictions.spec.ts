@@ -83,7 +83,9 @@ describe('AnthropicSimulatedProvider', () => {
     const sent = JSON.parse(params.messages[0].content.split('<donnees>')[1].split('</donnees>')[0]);
     expect(Object.keys(sent[0]).sort()).toEqual(['cveId', 'confidence', 'cweId', 'findingId', 'severity', 'title'].sort());
     expect(sent[0].title).toHaveLength(200);
-    expect(params.temperature).toBe(0);
+    // Aucun paramètre d'échantillonnage : les modèles récents répondent 400 « Extra inputs are not permitted ».
+    for (const forbidden of ['temperature', 'top_p', 'top_k']) expect(params).not.toHaveProperty(forbidden);
+    expect(Object.keys(params).sort()).toEqual(['max_tokens', 'messages', 'model', 'system']);
     expect(params.system).toMatch(/NON FIABLE/);
   });
 

@@ -158,6 +158,10 @@ describe('Simulation par l\'API Claude (fournisseur anthropic)', () => {
     const res = await importFile('a.json');
     expect(res.status).toBe(201);
     expect(res.body.provider).toBe('anthropic');
+    expect(res.body.m2Fallback).toBe(false);
+    // La page Modèles montre le résultat réel du dernier appel, pas seulement la configuration.
+    const state = await as(ctx, admin).get('/api/modeles');
+    expect(state.body.lastLlmRun).toMatchObject({ outcome: 'SUCCESS', fallback: false });
     const preds = await ctx.prisma.prediction.findMany();
     expect(preds.every((p) => p.simulated && p.provider === 'anthropic')).toBe(true);
     expect(await ctx.prisma.auditLog.count({ where: { action: 'PREDICTION_LLM_USAGE' } })).toBe(1);
@@ -174,6 +178,9 @@ describe('Simulation par l\'API Claude (fournisseur anthropic)', () => {
     const res = await importFile('inj2.json', 'valid-medium.json');
     expect(res.status).toBe(201);
     expect(res.body.provider).toBe('rules');
+    expect(res.body.m2Fallback).toBe(true); // le repli n'est plus silencieux
+    const state = await as(ctx, admin).get('/api/modeles');
+    expect(state.body.lastLlmRun).toMatchObject({ outcome: 'FAILURE', fallback: true });
     const bad = await ctx.prisma.prediction.findMany({ where: { OR: [{ probability: { gt: 1 } }, { probability: { lt: 0 } }] } });
     expect(bad).toHaveLength(0);
     const p = await ctx.prisma.prediction.findMany({ where: { provider: 'rules' } });

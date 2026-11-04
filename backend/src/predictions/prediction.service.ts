@@ -28,6 +28,8 @@ export interface PredictionSummary {
   /** Origine de M1 : modèle entraîné (m1-trained), simulation (rules / anthropic) ou mélange. */
   m1Provider: 'm1-trained' | 'rules' | 'anthropic' | 'mixed';
   fallback: boolean;
+  /** M2 : l'API Claude était configurée mais tout ou partie des constats a été calculé par les règles (échec ou plafond d'appels). */
+  m2Fallback: boolean;
   byPriority: Record<'P1' | 'P2' | 'P3' | 'P4', number>;
 }
 
@@ -203,7 +205,8 @@ export class PredictionService {
         metadata: { ...llm.usage, fallback },
       });
     }
-    return { total: findings.length, provider, m1Provider, fallback, byPriority };
+    const m2Fallback = Boolean(llm) && [...m2Results.values()].some((r) => r.provider === 'rules');
+    return { total: findings.length, provider, m1Provider, fallback, m2Fallback, byPriority };
   }
 
   private async runBatches<I extends { findingId: string }, O extends { findingId: string }>(

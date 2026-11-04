@@ -114,6 +114,8 @@ export interface ImportSummary {
   byPriority: Record<Priority, number>;
   provider: string;
   m1Provider?: 'm1-trained' | 'rules' | 'anthropic' | 'mixed';
+  /** M2 : l'API Claude était configurée mais des constats ont été calculés par les règles (échec ou plafond d'appels). */
+  m2Fallback?: boolean;
   simulated: boolean;
 }
 
@@ -142,6 +144,8 @@ export interface M1Evaluation {
 }
 
 export interface ModelState {
+  /** Dernier recours réel à l'API Claude pour M2 (journal d'audit), null s'il n'y en a jamais eu. */
+  lastLlmRun?: { at: string; outcome: 'SUCCESS' | 'FAILURE'; fallback: boolean; calls: number } | null;
   mode: string;
   message: string;
   version: string;

@@ -24,7 +24,17 @@ export class ModelsController {
   async state() {
     const m1Info = await this.trained.info();
     const m1Trained = this.trained.enabled;
+    // Résultat réel du dernier recours à l'API Claude (M2) : « fournisseur actif » n'indique que la configuration.
+    const lastRun = await this.prisma.auditLog.findFirst({
+      where: { action: 'PREDICTION_LLM_USAGE' },
+      orderBy: { createdAt: 'desc' },
+      select: { createdAt: true, outcome: true, metadata: true },
+    });
+    const usage = (lastRun?.metadata ?? {}) as { calls?: number; fallback?: boolean };
     return {
+      lastLlmRun: lastRun
+        ? { at: lastRun.createdAt, outcome: lastRun.outcome, fallback: Boolean(usage.fallback), calls: usage.calls ?? 0 }
+        : null,
       mode: 'SIMULATION',
       message: m1Trained
         ? "M1 est un modèle entraîné (V1). M2 n'est pas encore entraîné : ses sorties sont simulées."
