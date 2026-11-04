@@ -20,9 +20,10 @@ Architecture : un **second service** `m1` dans le projet Railway existant (`proj
 3. **Variables du service `m1`** :
    | Variable | Valeur |
    |---|---|
-   | `M1_SERVICE_TOKEN` | `${{ secret(48) }}` (généré par Railway, jamais écrit à la main ni dans Git) |
+   | `M1_SERVICE_TOKEN` | valeur aléatoire d'au moins 32 caractères, **jamais dans Git** (ex. `python -c "import secrets;print(secrets.token_urlsafe(48))"`). Poser `${{ secret(48) }}` via l'API ne garantit pas la génération (valeurs masquées, non vérifiable) : saisir une valeur connue ou la générer dans l'interface Railway. |
    | `M1_PORT` | `8001` |
-   | `M1_HOST` | `::` (écoute IPv4 et IPv6 : le réseau privé Railway peut être en IPv6) |
+   | `PORT` | `8001` (le port que la sonde de santé de Railway interroge) |
+   | `M1_HOST` | `0.0.0.0` (écoute IPv4). **Pas `::`** : avec `::`, la sonde de santé de Railway n'aboutit jamais (la connexion TCP n'est pas établie) et le déploiement échoue en « Healthcheck failure », constaté lors du premier déploiement. |
 4. Attendre que `m1` soit **sain** (sonde `/health`).
 5. **Variables du service `app`** (déclenchent son redéploiement) :
    | Variable | Valeur |
@@ -31,6 +32,10 @@ Architecture : un **second service** `m1` dans le projet Railway existant (`proj
    | `M1_SERVICE_URL` | `http://m1.railway.internal:8001` |
    | `M1_SERVICE_TOKEN` | `${{ m1.M1_SERVICE_TOKEN }}` (référence : le même jeton, sans le copier) |
 6. **Vérifier** : page Modèles (administrateur) → M1 « V1 · Modèle entraîné · logreg » et mesures de test affichées ; importer `fixtures/zap/valid-with-cve.json` → M1 « V1 », CVE-2021-44228 détecté et marqué « déjà dans le catalogue KEV ».
+
+## Si le déploiement échoue
+- Les journaux de `m1` sont presque vides par défaut (niveau « warning »). Un échec « Healthcheck failure » sans trace signifie en général que la sonde n'atteint pas le port : vérifier `PORT` et `M1_HOST=0.0.0.0`.
+- Le jeton ne doit jamais être le texte `${{ secret(48) }}` stocké tel quel : les valeurs sont masquées dans Railway, donc le plus sûr est de le saisir ou de le régénérer dans l'interface.
 
 ## Retour arrière
 `M1_PROVIDER=simulated` sur `app` (ou supprimer la variable) : l'application repasse immédiatement à l'estimation de repli. Si le service `m1` tombe, l'application se replie seule et journalise `M1_SERVICE_FALLBACK`.

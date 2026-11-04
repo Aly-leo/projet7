@@ -11,7 +11,7 @@ async function bootstrap(): Promise<void> {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, { bufferLogs: true });
   configureApp(app, env);
   await app.listen(env.PORT);
-  app.get(Logger).log(`API démarrée sur le port ${env.PORT} (préfixe /api, mode simulation M1/M2)`);
+  app.get(Logger).log(`API démarrée sur le port ${env.PORT} (préfixe /api, M1 : ${env.M1_PROVIDER === 'trained' ? 'service entraîné' : 'estimation de repli'}, M2 : simulé)`);
 }
 
 bootstrap().catch((err) => {
