@@ -162,14 +162,15 @@ export class FindingDetailPage {
   protected readonly assignee = signal('');
   protected readonly due = signal('');
   protected readonly corrComment = signal('');
-  /** M1 entraîné : version et origine de la valeur (modèle, taux historique du CWE ou prévalence globale) ; sinon simulation. */
+  /** M1 entraîné : version (V1) et origine de la valeur (modèle, taux historique du CWE ou prévalence globale) ; sinon estimation de repli. */
   protected readonly m1Origin = computed(() => {
     const p = this.f()?.predictions.m1;
     if (!p) return '–';
-    if (p.simulated) return `Simulé (${p.provider === 'anthropic' ? 'API Claude' : 'règles'})`;
+    if (p.simulated) return `Estimation de repli (${p.provider === 'anthropic' ? 'API Claude' : 'règles'})`;
     const src = (p.explanation as { source?: string } | null)?.source;
     const label = src === 'm1' ? 'prédiction du modèle' : src === 'cwe_rate' ? 'taux historique du CWE' : src === 'prior' ? 'prévalence globale (aucune information)' : 'valeur du modèle';
-    return `Modèle entraîné ${p.version} · ${label}`;
+    const v = /v(\d+)$/i.exec(p.version);
+    return `${v ? `V${v[1]}` : p.version} · ${label}`;
   });
   /**
    * Probabilité M1 lisible. Le modèle entraîné donne de vraies probabilités très faibles (≈ 0,05 % en moyenne) : on affiche des décimales

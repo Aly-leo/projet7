@@ -27,8 +27,8 @@ export class ModelsController {
     return {
       mode: 'SIMULATION',
       message: m1Trained
-        ? "M1 est un modèle entraîné (service d'inférence) ; M2 n'est pas entraîné : ses sorties sont simulées."
-        : 'Les modèles M1 et M2 ne sont pas entraînés : leurs sorties sont simulées.',
+        ? "M1 est un modèle entraîné (V1). M2 n'est pas encore entraîné : ses sorties sont simulées."
+        : "Le service d'inférence de M1 (V1) n'est pas connecté à cette instance : M1 utilise une estimation de repli. M2 n'est pas encore entraîné : ses sorties sont simulées.",
       m1: {
         mode: m1Trained ? 'trained' : 'simulated',
         configuredMode: this.env.M1_PROVIDER,

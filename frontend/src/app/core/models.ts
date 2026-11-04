@@ -129,6 +129,18 @@ export interface AuditEntry {
   metadata: unknown;
 }
 
+/** Mesures de M1 sur le jeu de test, renvoyées telles quelles par le service d'inférence (aucune valeur calculée côté application). */
+export interface M1Evaluation {
+  positives: number | null;
+  n: number | null;
+  prevalence: number | null;
+  prAuc: number | null;
+  prAucCi95: [number, number] | null;
+  rocAuc: number | null;
+  ece: number | null;
+  cvssPrAuc: number | null;
+}
+
 export interface ModelState {
   mode: string;
   message: string;
@@ -136,7 +148,7 @@ export interface ModelState {
   configuredProvider: string;
   activeProvider: string;
   anthropicConfigured: boolean;
-  m1?: { mode: 'trained' | 'simulated'; configuredMode: string; serviceConfigured: boolean; serviceReachable: boolean | null; info: { modelVersion?: string; model?: string; horizonDays?: number; label?: string; trainedAt?: string; calibration?: string } | null };
+  m1?: { mode: 'trained' | 'simulated'; configuredMode: string; serviceConfigured: boolean; serviceReachable: boolean | null; info: { modelVersion?: string; model?: string; horizonDays?: number; label?: string; trainedAt?: string; calibration?: string; evaluation?: M1Evaluation | null } | null };
   m2?: { mode: string };
   metrics: null;
   metricsPlanned: string[];
