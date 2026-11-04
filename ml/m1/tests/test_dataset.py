@@ -65,6 +65,11 @@ def test_decoupages_sans_chevauchement_dans_le_temps(df):
     assert (va["t0"] + pd.Timedelta(days=h) <= te["t0"].min()).all()  # purge de la validation
 
 
+@pytest.mark.xfail(
+    strict=True,
+    reason="Écart assumé (docs/DECISIONS.md n° 11) : à h=90, 17 positifs en validation et 22 en test, sous le seuil de 30. "
+    "Quand de nouvelles données atteindront le seuil, ce test réussira, pytest signalera l'échec « strict » : retirer alors ce marqueur.",
+)
 def test_assez_de_positifs_pour_evaluer(df):
     cfg = load_config()
     for s in ("val", "test"):

@@ -46,6 +46,30 @@ jobs:
       - name: Audit des dépendances
         run: npm audit --audit-level=high
 
+  # M1 : style puis tests sur données SYNTHÉTIQUES (fonctions, pipeline complet, service d'inférence).
+  # Les contrôles anti-fuite sur les données réelles (test_dataset.py) sont ignorés ici : les données ne sont pas versionnées,
+  # ils se lancent en local après `make dataset`.
+  ml-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ml/m1
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+          cache-dependency-path: ml/m1/requirements.txt
+      - name: Installation des dépendances (versions figées)
+        run: pip install -r requirements.txt
+      - name: Style (ruff)
+        run: python -m ruff check .
+      - name: Tests M1
+        run: python -m pytest tests -q
+        env:
+          PYTHONUTF8: '1'
+
   secrets:
     runs-on: ubuntu-latest
     steps:

@@ -32,7 +32,7 @@ Toutes les commandes se lancent depuis `ml/m1` avec `PYTHONPATH=src` (ou `python
 | 9. Sensibilité (validation) | `python -m m1.sensitivity` | 10 à 30 min |
 | 10. Table de consultation | `python -m m1.infer build-lookup` | 1 min |
 | Service | `M1_SERVICE_TOKEN=<16+ caractères> python -m m1 service` | écoute sur 127.0.0.1:8001 |
-| Tests | `python -m pytest -q tests` | |
+| Tests | `python -m pytest -q tests` | CI (job `ml-tests`) : style + tests sur données synthétiques. Les contrôles sur données réelles ne tournent qu'en local, après `make dataset`. Le test du seuil de 30 positifs est `xfail` (strict) tant que l'écart n° 11 existe. |
 
 Avec `make` : `make collect`, `make dataset train evaluate` refait tous les résultats à partir des données brutes.
 
