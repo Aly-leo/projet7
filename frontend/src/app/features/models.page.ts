@@ -27,7 +27,7 @@ import { IconComponent } from '../shared/ui';
                 <span class="muted">Service d'inférence non connecté : estimation de repli</span>
               }
             </dd>
-            <dt>M2 (priorité contextuelle)</dt><dd><span class="badge warn">Simulation</span> <span class="mono">{{ s.version }}</span></dd>
+            <dt>M2 (priorité contextuelle)</dt><dd><span class="badge warn">Simulation</span><span class="mono" style="margin-left:.6rem">{{ s.version }}</span></dd>
             <dt>Fournisseur M2 configuré</dt><dd>{{ s.configuredProvider === 'anthropic' ? 'API Claude' : 'Règles déterministes' }}</dd>
             <dt>Fournisseur M2 actif</dt><dd>{{ s.activeProvider === 'anthropic' ? 'API Claude' : 'Règles déterministes' }}</dd>
             <dt>Clé d'API</dt><dd>{{ s.anthropicConfigured ? 'Configurée côté serveur' : 'Non configurée' }}</dd>
