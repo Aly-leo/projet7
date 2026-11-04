@@ -1,0 +1,62 @@
+{
+  "raw": {
+    "kev": {
+      "file": "known_exploited_vulnerabilities_20261104.json",
+      "sha256": "0e7e91681f2207c7920a338f0d2b14c67933473ecf9550153627efaaba8d2e4c",
+      "rows": 1767,
+      "catalogVersion": "2026.11.03",
+      "dateReleased": "2026-11-03T20:00:24.8741Z",
+      "kev_launch_date": "2021-11-03",
+      "updated_at": "2026-11-04T08:41:00+00:00"
+    },
+    "exploitdb": {
+      "file": "files_exploits_20261104.csv",
+      "sha256": "10f31864b85c342c8a777a0248227dcd1e11ae50b246fcfa8bb8051bdc151062",
+      "rows": 47181,
+      "cves_with_public_exploit": 25094,
+      "updated_at": "2026-11-04T08:41:33+00:00"
+    },
+    "nvd": {
+      "files": 177,
+      "pages_expected": 177,
+      "start": "2018-01-01",
+      "end": "2026-11-04",
+      "api_key_used": false,
+      "bytes": 163633980,
+      "sha256_first_file": "7aafb82e7f1709e2d558a03bb203811e715e22cfc492142b6e2cd83ad57ebd0c",
+      "collection_date": "2026-11-04",
+      "updated_at": "2026-11-04T10:38:59+00:00"
+    },
+    "dataset": {
+      "30": {
+        "file": "m1_dataset_h30.csv",
+        "sha256": "ae28f6e65b3df3d02215c241f3639a528ff728f0b78273b39f4782f3d7158ed5",
+        "rows": 204369
+      },
+      "90": {
+        "file": "m1_dataset.csv",
+        "sha256": "fb4fc02a656544e84a1f2749e640994399f6281011168b15bd11bf09ea41722f",
+        "rows": 182751
+      },
+      "365": {
+        "file": "m1_dataset_h365.csv",
+        "sha256": "38e54a93262ea7bb4e6002355b51130c583090169a1fad3845534447b8413108",
+        "rows": 134115
+      },
+      "updated_at": "2026-11-04T10:54:55+00:00"
+    },
+    "epss": {
+      "dates_requested": 60,
+      "dates_missing": [
+        "2026-04-01"
+      ],
+      "files": 59,
+      "updated_at": "2026-11-04T10:54:12+00:00"
+    }
+  },
+  "dataset": {
+    "file": "m1_dataset.csv",
+    "sha256": "fb4fc02a656544e84a1f2749e640994399f6281011168b15bd11bf09ea41722f",
+    "rows": 182751
+  }
+}

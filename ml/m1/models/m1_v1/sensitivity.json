@@ -1,0 +1,95 @@
+{
+  "model": "logreg",
+  "params": {
+    "C": 0.05
+  },
+  "evaluated_on": "validation",
+  "horizon": {
+    "30": {
+      "pr_auc": 0.057171808535884244,
+      "roc_auc": 0.7748893208076881,
+      "precision@1%": 0.004048582995951417,
+      "n_train": 126046,
+      "positives_train": 28,
+      "positives_val": 9,
+      "prevalence_val": 0.00036429872495446266
+    },
+    "90": {
+      "pr_auc": 0.007552105738891494,
+      "roc_auc": 0.8512671015413035,
+      "precision@1%": 0.01090909090909091,
+      "n_train": 95203,
+      "positives_train": 54,
+      "positives_val": 17,
+      "prevalence_val": 0.0006175081729022884
+    },
+    "365": "non évaluable : validation sans positif avec ce découpage chronologique (purge des étiquettes immatures)"
+  },
+  "ablation": {
+    "toutes les variables": {
+      "pr_auc": 0.007552105738891494,
+      "roc_auc": 0.8512671015413035,
+      "precision@1%": 0.01090909090909091,
+      "n_train": 95203,
+      "positives_train": 54,
+      "positives_val": 17,
+      "prevalence_val": 0.0006175081729022884
+    },
+    "sans vendor_cve_count": {
+      "pr_auc": 0.004588817680008639,
+      "roc_auc": 0.8004387230849159,
+      "precision@1%": 0.0036363636363636364,
+      "n_train": 95203,
+      "positives_train": 54,
+      "positives_val": 17,
+      "prevalence_val": 0.0006175081729022884
+    },
+    "sans exploitdb_before_t0": {
+      "pr_auc": 0.005038231651357162,
+      "roc_auc": 0.8466329286048734,
+      "precision@1%": 0.007272727272727273,
+      "n_train": 95203,
+      "positives_train": 54,
+      "positives_val": 17,
+      "prevalence_val": 0.0006175081729022884
+    },
+    "sans variables CVSS": {
+      "pr_auc": 0.011416119265945325,
+      "roc_auc": 0.8097893829868661,
+      "precision@1%": 0.01090909090909091,
+      "n_train": 95203,
+      "positives_train": 54,
+      "positives_val": 17,
+      "prevalence_val": 0.0006175081729022884
+    },
+    "avec n_references (risque de fuite)": {
+      "pr_auc": 0.046348149086784064,
+      "roc_auc": 0.8815469050994076,
+      "precision@1%": 0.007272727272727273,
+      "n_train": 95203,
+      "positives_train": 54,
+      "positives_val": 17,
+      "prevalence_val": 0.0006175081729022884
+    }
+  },
+  "classes": {
+    "pondération des classes": {
+      "pr_auc": 0.007552105738891494,
+      "roc_auc": 0.8512671015413035,
+      "precision@1%": 0.01090909090909091,
+      "n_train": 95203,
+      "positives_train": 54,
+      "positives_val": 17,
+      "prevalence_val": 0.0006175081729022884
+    },
+    "SMOTE (entraînement seulement, stratégie 0,1)": {
+      "pr_auc": 0.004397298346344988,
+      "roc_auc": 0.8595113326106802,
+      "precision@1%": 0.007272727272727273,
+      "n_train": 95203,
+      "positives_train": 54,
+      "positives_val": 17,
+      "prevalence_val": 0.0006175081729022884
+    }
+  }
+}
