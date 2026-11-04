@@ -62,13 +62,15 @@ import { PriorityComponent } from '../shared/ui';
             <h2>Prédictions</h2>
             <dl class="kv">
               <dt>Probabilité d'exploitation (M1)</dt>
-              <dd>{{ d.predictions.m1 ? (d.predictions.m1.probability * 100).toFixed(0) + ' %' : '–' }}</dd>
+              <dd>{{ m1Display() }}</dd>
               <dt>Priorité (M2)</dt>
               <dd><app-priority [value]="d.modelPriority" /></dd>
               <dt>Probabilité calibrée (M2)</dt>
               <dd>{{ d.predictions.m2 ? (d.predictions.m2.probability * 100).toFixed(0) + ' %' : '–' }}</dd>
-              <dt>Fournisseur</dt>
-              <dd>{{ d.predictions.m2?.provider === 'anthropic' ? 'API Claude' : 'Règles' }} · {{ d.predictions.m2?.version }}</dd>
+              <dt>Origine de M1</dt>
+              <dd>{{ m1Origin() }}</dd>
+              <dt>Origine de M2</dt>
+              <dd>Simulé ({{ d.predictions.m2?.provider === 'anthropic' ? 'API Claude' : 'règles' }}) · {{ d.predictions.m2?.version }}</dd>
             </dl>
             <h3 style="margin:1rem 0 .4rem">Explication</h3>
             @for (c of d.predictions.m2?.explanation ?? []; track c.feature) {
@@ -160,6 +162,31 @@ export class FindingDetailPage {
   protected readonly assignee = signal('');
   protected readonly due = signal('');
   protected readonly corrComment = signal('');
+  /** M1 entraîné : version et origine de la valeur (modèle, taux historique du CWE ou prévalence globale) ; sinon simulation. */
+  protected readonly m1Origin = computed(() => {
+    const p = this.f()?.predictions.m1;
+    if (!p) return '–';
+    if (p.simulated) return `Simulé (${p.provider === 'anthropic' ? 'API Claude' : 'règles'})`;
+    const src = (p.explanation as { source?: string } | null)?.source;
+    const label = src === 'm1' ? 'prédiction du modèle' : src === 'cwe_rate' ? 'taux historique du CWE' : src === 'prior' ? 'prévalence globale (aucune information)' : 'valeur du modèle';
+    return `Modèle entraîné ${p.version} · ${label}`;
+  });
+  /**
+   * Probabilité M1 lisible. Le modèle entraîné donne de vraies probabilités très faibles (≈ 0,05 % en moyenne) : on affiche des décimales
+   * adaptées et le risque relatif à la moyenne, plus parlant. Un CVE déjà dans KEV est signalé.
+   */
+  protected readonly m1Display = computed(() => {
+    const p = this.f()?.predictions.m1;
+    if (!p) return '–';
+    const pct = p.probability * 100;
+    const text = (pct >= 10 ? pct.toFixed(0) : pct >= 1 ? pct.toFixed(1) : pct.toFixed(2)) + ' %';
+    if (p.simulated) return text;
+    const x = p.explanation as { relativeRisk?: number | null; alreadyInKev?: boolean | null } | null;
+    const parts = [text];
+    if (x?.relativeRisk != null) parts.push(`${x.relativeRisk >= 10 ? x.relativeRisk.toFixed(0) : x.relativeRisk.toFixed(1)}× la moyenne`);
+    if (x?.alreadyInKev) parts.push('déjà dans le catalogue KEV');
+    return parts.join(' · ');
+  });
   protected readonly next = computed(() => {
     const s = this.f()?.correction?.status;
     return s ? TRANSITIONS[s] : [];

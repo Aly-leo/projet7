@@ -16,7 +16,16 @@ import { IconComponent } from '../shared/ui';
         <section class="glass card">
           <div class="alert info" style="margin-bottom:1rem"><strong>Mode simulation.</strong> {{ s.message }}</div>
           <dl class="kv">
-            <dt>Mode</dt><dd><span class="badge warn">Simulation</span></dd>
+            <dt>M1 (exploitabilité)</dt>
+            <dd>
+              @if (s.m1?.mode === 'trained') {
+                <span class="badge ok">Modèle entraîné</span> {{ s.m1?.info?.modelVersion }} · {{ s.m1?.info?.model }} · horizon {{ s.m1?.info?.horizonDays }} j
+              } @else {
+                <span class="badge warn">Simulation</span>
+                @if (s.m1?.configuredMode === 'trained') { <span class="badge bad">Service M1 injoignable : repli sur la simulation</span> }
+              }
+            </dd>
+            <dt>M2 (priorité contextuelle)</dt><dd><span class="badge warn">Simulation</span></dd>
             <dt>Version</dt><dd class="mono">{{ s.version }}</dd>
             <dt>Fournisseur configuré</dt><dd>{{ s.configuredProvider === 'anthropic' ? 'API Claude' : 'Règles déterministes' }}</dd>
             <dt>Fournisseur actif</dt><dd>{{ s.activeProvider === 'anthropic' ? 'API Claude (simulation)' : 'Règles déterministes (simulation)' }}</dd>

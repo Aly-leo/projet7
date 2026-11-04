@@ -113,6 +113,7 @@ export interface ImportSummary {
   findingsUpdated: number;
   byPriority: Record<Priority, number>;
   provider: string;
+  m1Provider?: 'm1-trained' | 'rules' | 'anthropic' | 'mixed';
   simulated: boolean;
 }
 
@@ -135,6 +136,8 @@ export interface ModelState {
   configuredProvider: string;
   activeProvider: string;
   anthropicConfigured: boolean;
+  m1?: { mode: 'trained' | 'simulated'; configuredMode: string; serviceConfigured: boolean; serviceReachable: boolean | null; info: { modelVersion?: string; model?: string; horizonDays?: number; label?: string; trainedAt?: string; calibration?: string } | null };
+  m2?: { mode: string };
   metrics: null;
   metricsPlanned: string[];
 }

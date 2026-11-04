@@ -63,7 +63,7 @@ const MAX_MB = 10;
             <div><div class="muted">Constats</div><strong style="font-size:1.6rem">{{ r.findingsTotal }}</strong></div>
             <div><div class="muted">Nouveaux</div><strong style="font-size:1.6rem">{{ r.findingsNew }}</strong></div>
             <div><div class="muted">Mis à jour</div><strong style="font-size:1.6rem">{{ r.findingsUpdated }}</strong></div>
-            <div><div class="muted">Fournisseur</div><strong style="font-size:1.1rem">{{ r.provider === 'anthropic' ? 'API Claude' : 'Règles' }}</strong></div>
+            <div><div class="muted">M1</div><strong style="font-size:1.1rem">{{ r.m1Provider === 'm1-trained' ? 'Modèle entraîné' : r.m1Provider === 'mixed' ? 'Mixte' : 'Simulé' }}</strong></div>
           </div>
           <div class="prio">
             @for (p of priorities; track p) { <span class="badge" [class]="p">{{ p }} · {{ label(p) }} : {{ r.byPriority[p] }}</span> }
