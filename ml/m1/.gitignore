@@ -1,0 +1,13 @@
+# Données (volumineuses, re-téléchargeables) et environnement
+data/
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.pyc
+.env*
+
+# Verrou d'évaluation du test et table de consultation (dérivés des données brutes)
+models/m1_v1/test_evaluation.lock
+models/m1_v1/cve_lookup.parquet
+models/m1_v1/kev_ids.json

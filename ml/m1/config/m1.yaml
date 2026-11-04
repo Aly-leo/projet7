@@ -1,0 +1,30 @@
+# Configuration de M1 (exploitabilité). Toutes les valeurs ci-dessous sont lues par le code.
+seed: 42
+
+# Horizon h (jours) de l'étiquette « ajouté à KEV dans ]t0, t0 + h] ».
+horizon_days: 90
+sensitivity_horizons: [30, 90, 365]
+
+# Instant de référence : premier jour du mois qui suit (publication + t0_delay_days).
+t0_delay_days: 30
+
+nvd:
+  start_date: "2018-01-01"     # début lointain : sert aux compteurs historiques (vendor_cve_count)
+  window_days: 100             # l'API NVD limite l'intervalle de dates à 120 jours
+  page_size: 2000
+
+# Découpage chronologique : répartition visée des POSITIFS entre entraînement / validation / test.
+split:
+  train_share: 0.6
+  val_share: 0.2
+min_positives_eval: 30
+
+# Variables du modèle (epss_t0 n'est JAMAIS une variable ; n_references exclue par défaut : risque de fuite).
+features:
+  categorical: [av, ac, pr, ui, s, c, i, a, cwe]
+  numeric: [cvss_base, vendor_cve_count, exploitdb_before_t0]
+  excluded_by_default: [n_references]
+
+cwe_top_n: 30
+cwe_smoothing_pseudo_positives: 1   # force du prior = ce nombre de positifs fictifs (alpha = k / prévalence) ; un alpha fixe de 20 écrasait les taux à ~0
+bootstrap_draws: 1000
