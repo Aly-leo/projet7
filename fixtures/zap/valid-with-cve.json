@@ -1,0 +1,52 @@
+{
+  "@programName": "ZAP",
+  "@version": "2.15.0",
+  "@generated": "Sat, 25 Oct 2026 11:00:00",
+  "created": "2026-10-25T11:00:00.000Z",
+  "site": [
+    {
+      "@name": "http://cible-de-labo.test",
+      "@host": "cible-de-labo.test",
+      "@port": "80",
+      "@ssl": "false",
+      "alerts": [
+        {
+          "pluginid": "90035",
+          "alertRef": "90035-1",
+          "alert": "Composant vulnérable (journalisation)",
+          "name": "Composant vulnérable (journalisation)",
+          "riskcode": "3",
+          "confidence": "3",
+          "riskdesc": "High (High)",
+          "desc": "<p>La bibliothèque de journalisation détectée est affectée par CVE-2021-44228 (exécution de code à distance).</p>",
+          "instances": [{ "uri": "http://cible-de-labo.test/api/log", "method": "POST", "param": "", "attack": "", "evidence": "", "otherinfo": "" }],
+          "count": "1",
+          "solution": "<p>Mettre à jour la bibliothèque.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://nvd.nist.gov/vuln/detail/CVE-2021-44228</p>",
+          "cweid": "502",
+          "wascid": "20",
+          "sourceid": "1"
+        },
+        {
+          "pluginid": "10038",
+          "alertRef": "10038-1",
+          "alert": "Content Security Policy (CSP) Header Not Set",
+          "name": "Content Security Policy (CSP) Header Not Set",
+          "riskcode": "2",
+          "confidence": "3",
+          "riskdesc": "Medium (High)",
+          "desc": "<p>L'en-tête CSP est absent.</p>",
+          "instances": [{ "uri": "http://cible-de-labo.test/", "method": "GET", "param": "", "attack": "", "evidence": "", "otherinfo": "" }],
+          "count": "1",
+          "solution": "<p>Définir l'en-tête.</p>",
+          "otherinfo": "",
+          "reference": "<p>https://developer.mozilla.org/docs/Web/HTTP/CSP</p>",
+          "cweid": "693",
+          "wascid": "15",
+          "sourceid": "1"
+        }
+      ]
+    }
+  ]
+}

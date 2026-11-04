@@ -7,8 +7,10 @@ import type { Prisma } from '../generated/prisma/client.js';
 import { PrismaService } from '../prisma/prisma.service.js';
 import { AnthropicSimulatedProvider, BATCH_SIZE } from './anthropic.provider.js';
 import { RuleBasedProvider } from './rules.provider.js';
+import { TrainedM1Provider, type TrainedM1Output } from './trained-m1.provider.js';
 import {
   SIM_VERSION,
+  m1LevelForM2,
   type M1Input,
   type M1Output,
   type M2Input,
@@ -23,6 +25,8 @@ export type LlmProviderFactory = () => AnthropicSimulatedProvider | null;
 export interface PredictionSummary {
   total: number;
   provider: 'anthropic' | 'rules' | 'mixed';
+  /** Origine de M1 : modèle entraîné (m1-trained), simulation (rules / anthropic) ou mélange. */
+  m1Provider: 'm1-trained' | 'rules' | 'anthropic' | 'mixed';
   fallback: boolean;
   byPriority: Record<'P1' | 'P2' | 'P3' | 'P4', number>;
 }
@@ -36,6 +40,7 @@ export class PredictionService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly rules: RuleBasedProvider,
+    private readonly trained: TrainedM1Provider,
     private readonly audit: AuditService,
     @Inject(ENV) private readonly env: Env,
     @Optional() @Inject(LLM_PROVIDER_FACTORY) private readonly llmFactory?: LlmProviderFactory,
@@ -78,12 +83,27 @@ export class PredictionService {
     const llmIds = new Set(m1Inputs.slice(0, llmCapacity).map((i) => i.findingId));
     let fallback = findings.length > llmCapacity && this.env.PREDICTION_PROVIDER === 'anthropic';
 
-    const m1Results = new Map<string, { out: M1Output; provider: PredictionProvider['name'] }>();
+    type Provider = PredictionProvider['name'] | 'm1-trained';
+    const m1Results = new Map<string, { out: M1Output; provider: Provider; trained?: TrainedM1Output }>();
     const m2Results = new Map<string, { out: M2Output; provider: PredictionProvider['name'] }>();
 
-    // --- M1 ---
-    const m1Llm = m1Inputs.filter((i) => llmIds.has(i.findingId));
-    const m1Rules = m1Inputs.filter((i) => !llmIds.has(i.findingId));
+    // --- M1 : modèle ENTRAÎNÉ si disponible ; en cas d'échec du service, repli sur la simulation (marquée simulée) ---
+    let remaining = m1Inputs;
+    if (this.trained.enabled) {
+      try {
+        const got = await this.trained.predict(m1Inputs.map((i) => ({ findingId: i.findingId, cveId: i.cveId, cweId: i.cweId })));
+        for (const [id, t] of got) m1Results.set(id, { out: { findingId: id, exploitationProbability: t.probability }, provider: 'm1-trained', trained: t });
+        remaining = [];
+      } catch (err) {
+        fallback = true;
+        this.logger.error(`Service M1 indisponible, repli sur la simulation : ${(err as Error).message.slice(0, 120)}`);
+        await this.audit.log(ctx, { action: 'M1_SERVICE_FALLBACK', outcome: 'FAILURE', metadata: { reason: (err as Error).name } });
+      }
+    }
+
+    // --- M1 simulé (LLM puis règles) pour ce que le modèle entraîné n'a pas traité ---
+    const m1Llm = remaining.filter((i) => llmIds.has(i.findingId));
+    const m1Rules = remaining.filter((i) => !llmIds.has(i.findingId));
     const llmOk1 = await this.runBatches(llm, m1Llm, (p, b) => p.predictM1(b), (i) => this.key('M1', i), 'M1');
     for (const [id, out] of llmOk1.done) m1Results.set(id, { out, provider: 'anthropic' });
     if (llmOk1.failed.length) fallback = true;
@@ -97,11 +117,15 @@ export class PredictionService {
         ...i,
         exposure: f.application.exposure,
         sensitivity: f.application.sensitivity,
-        m1Probability: m1Results.get(i.findingId)!.out.exploitationProbability,
+        // M1 entraîné : niveau relatif (voir m1LevelForM2) ; M1 simulé : déjà sur l'échelle attendue par M2.
+        m1Probability: (() => {
+          const r = m1Results.get(i.findingId)!;
+          return r.trained ? m1LevelForM2(r.trained.relativeRisk, r.trained.alreadyInKev) : r.out.exploitationProbability;
+        })(),
         instancesCount: f.instancesCount,
       };
     });
-    const m2Llm = m2Inputs.filter((i) => llmIds.has(i.findingId) && m1Results.get(i.findingId)!.provider === 'anthropic');
+    const m2Llm = m2Inputs.filter((i) => llmIds.has(i.findingId));
     const m2LlmIds = new Set(m2Llm.map((i) => i.findingId));
     const m2Rules = m2Inputs.filter((i) => !m2LlmIds.has(i.findingId));
     const llmOk2 = await this.runBatches(llm, m2Llm, (p, b) => p.predictM2(b), (i) => this.key('M2', i), 'M2');
@@ -116,7 +140,24 @@ export class PredictionService {
       const m1 = m1Results.get(f.id)!;
       const m2 = m2Results.get(f.id)!;
       predictions.push(
-        { findingId: f.id, model: 'M1', version: SIM_VERSION, simulated: true, provider: m1.provider, probability: m1.out.exploitationProbability },
+        m1.trained
+          ? {
+              findingId: f.id,
+              model: 'M1',
+              version: m1.trained.modelVersion,
+              simulated: false, // modèle entraîné sur des données réelles
+              provider: 'm1-trained',
+              probability: m1.out.exploitationProbability,
+              // Origine de la valeur : modèle (CVE/variables), taux historique par CWE, ou prévalence globale.
+              explanation: {
+                source: m1.trained.source,
+                calibrated: m1.trained.calibrated,
+                relativeRisk: m1.trained.relativeRisk,
+                alreadyInKev: m1.trained.alreadyInKev,
+                levelForM2: m1LevelForM2(m1.trained.relativeRisk, m1.trained.alreadyInKev),
+              } as unknown as Prisma.InputJsonValue,
+            }
+          : { findingId: f.id, model: 'M1', version: SIM_VERSION, simulated: true, provider: m1.provider, probability: m1.out.exploitationProbability },
         {
           findingId: f.id,
           model: 'M2',
@@ -151,8 +192,10 @@ export class PredictionService {
       { timeout: 120_000, maxWait: 20_000 },
     );
 
-    const providers = new Set([...m1Results.values(), ...m2Results.values()].map((r) => r.provider));
-    const provider = providers.size > 1 ? 'mixed' : providers.has('anthropic') ? 'anthropic' : 'rules';
+    const m1Set = new Set([...m1Results.values()].map((r) => r.provider));
+    const m1Provider = m1Set.size > 1 ? 'mixed' : ((m1Set.values().next().value ?? 'rules') as 'm1-trained' | 'rules' | 'anthropic');
+    const m2Set = new Set([...m2Results.values()].map((r) => r.provider));
+    const provider = m2Set.size > 1 ? 'mixed' : m2Set.has('anthropic') ? 'anthropic' : 'rules';
     if (llm && this.llm) {
       await this.audit.log(ctx, {
         action: 'PREDICTION_LLM_USAGE',
@@ -160,7 +203,7 @@ export class PredictionService {
         metadata: { ...llm.usage, fallback },
       });
     }
-    return { total: findings.length, provider, fallback, byPriority };
+    return { total: findings.length, provider, m1Provider, fallback, byPriority };
   }
 
   private async runBatches<I extends { findingId: string }, O extends { findingId: string }>(

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { fingerprintOf, jsonDepth, parseZapReport, toPlainText, ZapImportError } from './zap.parser.js';
+import { extractCveId, fingerprintOf, jsonDepth, parseZapReport, toPlainText, ZapImportError } from './zap.parser.js';
 
 const file = (obj: unknown, name = 'r.json', mimetype = 'application/json') => ({
   originalname: name,
@@ -34,6 +34,33 @@ describe('Parseur de rapports ZAP', () => {
     const { findings } = parse([alert({ desc: '<p>Un <b>test</b></p><script>alert(1)</script><img src=x onerror=alert(2)><a href="javascript:alert(3)">lien</a>' })]);
     expect(findings[0]!.description).toBe('Un test\nlien');
     expect(toPlainText('<p>a &lt; b</p>', 50)).toBe('a < b');
+  });
+
+  it('extrait le CVE de la description, des informations complémentaires ou des références', () => {
+    const { findings } = parse([
+      alert({ pluginid: '1', desc: '<p>Voir cve-2021-44228 pour le détail.</p>' }),
+      alert({ pluginid: '2', alert: 'B', desc: 'rien', otherinfo: 'Lié à CVE-2024-3094.' }),
+      alert({ pluginid: '3', alert: 'C', desc: 'rien', reference: '<p>https://nvd.nist.gov/vuln/detail/CVE-2023-4863</p>' }),
+      alert({ pluginid: '4', alert: 'D', desc: 'aucun identifiant' }),
+    ]);
+    expect(findings.map((f) => f.cveId)).toEqual(['CVE-2021-44228', 'CVE-2024-3094', 'CVE-2023-4863', null]);
+  });
+
+  it('ne retient que des identifiants CVE strictement conformes', () => {
+    const now = new Date('2026-11-04T00:00:00Z');
+    expect(extractCveId('CVE-2021-44228', now)).toBe('CVE-2021-44228');
+    expect(extractCveId('a CVE-1998-0001 puis CVE-2022-12345', now)).toBe('CVE-2022-12345'); // année < 1999 ignorée
+    expect(extractCveId('CVE-2099-00001', now)).toBeNull(); // année dans le futur lointain
+    expect(extractCveId('CVE-2027-0001', now)).toBe('CVE-2027-0001'); // an prochain toléré
+    expect(extractCveId('XCVE-2024-1234 CVE-2024-123 CVE-2024-12345678 CVE-2024-1234x', now)).toBeNull();
+    expect(extractCveId("CVE-2024-1234'; DROP TABLE x;--", now)).toBe('CVE-2024-1234'); // seul l'identifiant est conservé
+    expect(extractCveId('', now)).toBeNull();
+  });
+
+  it('conserve le premier CVE lors de la fusion des alertes dupliquées', () => {
+    const { findings } = parse([alert({ desc: 'sans' }), alert({ desc: 'CVE-2022-0001' })]);
+    expect(findings).toHaveLength(1);
+    expect(findings[0]!.cveId).toBe('CVE-2022-0001');
   });
 
   it('plafonne à 50 URL d\'exemple et fusionne les alertes dupliquées', () => {

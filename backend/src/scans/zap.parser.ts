@@ -18,6 +18,8 @@ export interface ParsedFinding {
   severity: number;
   confidence: string | null;
   cweId: number | null;
+  /** Premier identifiant CVE valide trouvé dans le texte de l'alerte (description, informations complémentaires, références). */
+  cveId: string | null;
   description: string;
   solution: string | null;
   instancesCount: number;
@@ -55,6 +57,8 @@ const alertSchema = z.object({
   riskdesc: optStr(100),
   desc: optStr(100_000),
   solution: optStr(100_000),
+  otherinfo: optStr(100_000),
+  reference: optStr(100_000),
   cweid: optInt(-1, 100_000),
   count: optInt(0, 10_000_000),
   instances: z.array(instanceSchema).max(100_000).optional(),
@@ -99,6 +103,22 @@ export function toPlainText(html: string | undefined, maxLen: number): string {
 // sanitize-html réencode &, <, > ; on les restitue en texte (affiché ensuite comme texte, jamais comme HTML).
 function decodeBasicEntities(s: string): string {
   return s.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, '&');
+}
+
+const CVE_PATTERN = /(?<![A-Za-z0-9-])CVE-(\d{4})-(\d{4,7})(?![A-Za-z0-9-])/gi;
+const FIRST_CVE_YEAR = 1999;
+
+/**
+ * Premier identifiant CVE plausible d'un texte (déjà converti en texte brut), normalisé en majuscules.
+ * Année entre 1999 et l'an prochain ; les identifiants collés à d'autres caractères (ex. « XCVE-2024-1234 ») sont ignorés.
+ * Le texte vient d'un fichier non fiable : seul un identifiant strictement conforme est conservé.
+ */
+export function extractCveId(text: string, now: Date = new Date()): string | null {
+  for (const m of text.matchAll(CVE_PATTERN)) {
+    const year = Number(m[1]);
+    if (year >= FIRST_CVE_YEAR && year <= now.getUTCFullYear() + 1) return `CVE-${m[1]}-${m[2]}`;
+  }
+  return null;
 }
 
 export function normalizeTitle(title: string): string {
@@ -158,6 +178,7 @@ export function parseZapReport(
         severity: a.riskcode ?? 0,
         confidence: a.confidence !== undefined ? (CONFIDENCE[a.confidence] ?? null) : null,
         cweId,
+        cveId: extractCveId([a.desc, a.otherinfo, a.reference].map((t) => toPlainText(t, 20_000)).join('\n')),
         description: toPlainText(a.desc, 2000),
         solution: a.solution ? toPlainText(a.solution, 2000) || null : null,
         instancesCount: Math.max(a.count ?? 0, a.instances?.length ?? 0, 1),
@@ -168,6 +189,7 @@ export function parseZapReport(
       if (prev) {
         prev.instancesCount += finding.instancesCount;
         prev.severity = Math.max(prev.severity, finding.severity);
+        prev.cveId ??= finding.cveId;
         prev.sampleUrls = [...new Set([...prev.sampleUrls, ...finding.sampleUrls])].slice(0, MAX_URLS);
       } else merged.set(key, finding);
     }

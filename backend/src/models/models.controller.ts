@@ -5,6 +5,7 @@ import { AuditService } from '../audit/audit.service.js';
 import { Inject } from '@nestjs/common';
 import { ENV, type Env } from '../config/env.js';
 import { PredictionService } from '../predictions/prediction.service.js';
+import { TrainedM1Provider } from '../predictions/trained-m1.provider.js';
 import { SIM_VERSION } from '../predictions/prediction.types.js';
 import { PrismaService } from '../prisma/prisma.service.js';
 
@@ -12,6 +13,7 @@ import { PrismaService } from '../prisma/prisma.service.js';
 export class ModelsController {
   constructor(
     private readonly predictions: PredictionService,
+    private readonly trained: TrainedM1Provider,
     private readonly prisma: PrismaService,
     private readonly audit: AuditService,
     @Inject(ENV) private readonly env: Env,
@@ -19,10 +21,22 @@ export class ModelsController {
 
   @Get()
   @AdminOnly()
-  state() {
+  async state() {
+    const m1Info = await this.trained.info();
+    const m1Trained = this.trained.enabled;
     return {
       mode: 'SIMULATION',
-      message: 'Les modèles M1 et M2 ne sont pas entraînés : leurs sorties sont simulées.',
+      message: m1Trained
+        ? "M1 est un modèle entraîné (service d'inférence) ; M2 n'est pas entraîné : ses sorties sont simulées."
+        : 'Les modèles M1 et M2 ne sont pas entraînés : leurs sorties sont simulées.',
+      m1: {
+        mode: m1Trained ? 'trained' : 'simulated',
+        configuredMode: this.env.M1_PROVIDER,
+        serviceConfigured: Boolean(this.env.M1_SERVICE_URL && this.env.M1_SERVICE_TOKEN),
+        serviceReachable: m1Trained ? m1Info !== null : null,
+        info: m1Info,
+      },
+      m2: { mode: 'simulated' },
       version: SIM_VERSION,
       configuredProvider: this.env.PREDICTION_PROVIDER,
       activeProvider: this.predictions.activeProvider(),

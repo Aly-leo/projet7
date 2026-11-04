@@ -41,6 +41,10 @@ const schema = z.object({
   RAW_REPORT_MAX_MB: int(1, 0, 20),
   IMPORTS_PER_HOUR: int(10, 1, 1000),
   PREDICTION_PROVIDER: z.enum(['rules', 'anthropic']).default('rules'),
+  M1_PROVIDER: z.enum(['simulated', 'trained']).default('simulated'),
+  M1_SERVICE_URL: optionalString.pipe(z.string().url().optional()),
+  M1_SERVICE_TOKEN: optionalString.pipe(z.string().min(16, 'M1_SERVICE_TOKEN : 16 caractères au moins').optional()),
+  M1_TIMEOUT_MS: int(5_000, 500, 60_000),
   ANTHROPIC_API_KEY: optionalString,
   ANTHROPIC_MODEL: optionalString,
   LLM_MAX_CALLS_PER_IMPORT: int(20, 0, 500),
@@ -66,6 +70,9 @@ export function loadEnv(source: NodeJS.ProcessEnv = process.env): Env {
     if (env.JWT_ACCESS_SECRET.length < 64) problems.push('JWT_ACCESS_SECRET doit compter 64 caractères au moins en production');
     if (!env.COOKIE_SECURE) problems.push('COOKIE_SECURE doit valoir true en production');
     if (!env.APP_ORIGIN.startsWith('https://')) problems.push('APP_ORIGIN doit être en https en production');
+    if (env.M1_PROVIDER === 'trained' && (!env.M1_SERVICE_URL || !env.M1_SERVICE_TOKEN)) {
+      problems.push('M1_SERVICE_URL et M1_SERVICE_TOKEN sont requis avec M1_PROVIDER=trained');
+    }
     if (env.PREDICTION_PROVIDER === 'anthropic' && (!env.ANTHROPIC_API_KEY || !env.ANTHROPIC_MODEL)) {
       problems.push('ANTHROPIC_API_KEY et ANTHROPIC_MODEL sont requis avec PREDICTION_PROVIDER=anthropic');
     }

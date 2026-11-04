@@ -90,6 +90,7 @@ export class ScansService {
                   severity: f.severity,
                   confidence: f.confidence,
                   cweId: f.cweId,
+                  cveId: f.cveId,
                   description: f.description,
                   solution: f.solution,
                   instancesCount: f.instancesCount,
@@ -128,7 +129,7 @@ export class ScansService {
         summary = await this.predictions.predictFindings(result.newIds, ctx);
       } catch (err) {
         this.logger.error(`Prédictions impossibles : ${(err as Error).message}`);
-        summary = { total: 0, provider: 'rules' as const, fallback: true, byPriority: { P1: 0, P2: 0, P3: 0, P4: 0 } };
+        summary = { total: 0, provider: 'rules' as const, m1Provider: 'rules' as const, fallback: true, byPriority: { P1: 0, P2: 0, P3: 0, P4: 0 } };
       }
 
       const response = {
@@ -138,6 +139,7 @@ export class ScansService {
         findingsUpdated: result.updated,
         byPriority: summary.byPriority,
         provider: summary.provider,
+        m1Provider: summary.m1Provider,
         simulated: true,
       };
       await this.audit.log(ctx, {

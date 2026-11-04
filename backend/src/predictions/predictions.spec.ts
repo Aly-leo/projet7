@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { AnthropicSimulatedProvider, type LlmClient } from './anthropic.provider.js';
 import { RuleBasedProvider } from './rules.provider.js';
-import type { M1Input, M2Input } from './prediction.types.js';
+import { m1LevelForM2, type M1Input, type M2Input } from './prediction.types.js';
 
 const m1: M1Input[] = [
   { findingId: 'f1', title: 'SQL Injection', cweId: 89, cveId: null, severity: 3, confidence: 'High' },
@@ -14,6 +14,34 @@ const clientReturning = (...responses: unknown[]): LlmClient => {
   for (const r of responses) create.mockResolvedValueOnce(r);
   return { messages: { create } };
 };
+
+describe('m1LevelForM2 (adaptateur M1 entraîné → M2)', () => {
+  it('place le risque moyen à 1/3, monte avec le risque relatif et reste borné', () => {
+    expect(m1LevelForM2(1)).toBeCloseTo(0.111, 3);
+    expect(m1LevelForM2(10)).toBeCloseTo(0.444, 3);
+    expect(m1LevelForM2(100)).toBe(1);
+    expect(m1LevelForM2(1e6)).toBe(1);
+    expect(m1LevelForM2(0.1)).toBe(0);
+    expect(m1LevelForM2(0.0001)).toBe(0);
+    expect(m1LevelForM2(40)).toBeGreaterThan(m1LevelForM2(4));
+  });
+  it('vaut 1 pour un CVE déjà dans KEV et reste neutre sans information', () => {
+    expect(m1LevelForM2(0.5, true)).toBe(1);
+    expect(m1LevelForM2(null)).toBeCloseTo(0.111, 3);
+    expect(m1LevelForM2(undefined)).toBeCloseTo(0.111, 3);
+    expect(m1LevelForM2(Number.NaN)).toBeCloseTo(0.111, 3);
+    expect(m1LevelForM2(-3)).toBeCloseTo(0.111, 3);
+  });
+  it('rend à M1 un poids comparable à l\'ancienne échelle dans M2', async () => {
+    const rules = new RuleBasedProvider();
+    const base = { ...m1[0]!, severity: 2, exposure: 'INTERNAL' as const, sensitivity: 'MEDIUM' as const, instancesCount: 1 }; // cas non saturé
+    const [raw, level] = await rules.predictM2([
+      { ...base, m1Probability: 0.0005 }, // probabilité brute de M1 entraîné : M1 est inaudible
+      { ...base, findingId: 'f9', m1Probability: m1LevelForM2(40) }, // 40× la moyenne
+    ]);
+    expect(level!.calibratedProbability - raw!.calibratedProbability).toBeGreaterThan(0.25);
+  });
+});
 
 describe('RuleBasedProvider (simulé, déterministe)', () => {
   const rules = new RuleBasedProvider();
