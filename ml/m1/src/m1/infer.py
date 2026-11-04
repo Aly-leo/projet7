@@ -45,6 +45,7 @@ class Prediction:
 class M1Predictor:
     def __init__(self, model_dir: Path | str = MODELS):
         mdir = Path(model_dir)
+        self.mdir = mdir
         self.art = joblib.load(mdir / "model.joblib")
         cal = joblib.load(mdir / "calibrator.joblib")
         self.calibrator, self.prior = cal["obj"], float(cal["global_prior"])
@@ -55,11 +56,22 @@ class M1Predictor:
         self.lookup = pd.read_parquet(lookup_path).set_index("cve_id") if lookup_path.exists() else None
         self.kev_ids: set[str] = set(json.loads((mdir / "kev_ids.json").read_text())) if (mdir / "kev_ids.json").exists() else set()
 
+    def evaluation(self) -> dict[str, Any] | None:
+        """Mesures du jeu de test, lues dans metrics.json (jamais recalculées ni inventées) ; None si le fichier est absent."""
+        path = self.mdir / "metrics.json"
+        if not path.exists():
+            return None
+        m = json.loads(path.read_text(encoding="utf-8"))
+        t, cvss = m.get("test_m1_calibre", {}), m.get("reference_cvss", {})
+        ci = m.get("bootstrap_all_rows", {}).get("ci95", {}).get("m1", {}).get("pr_auc")
+        return {"positives": t.get("positives"), "n": t.get("n"), "prevalence": t.get("prevalence"), "prAuc": t.get("pr_auc"),
+                "prAucCi95": ci, "rocAuc": t.get("roc_auc"), "ece": t.get("ece"), "cvssPrAuc": cvss.get("pr_auc")}
+
     def info(self) -> dict[str, Any]:
         return {"modelVersion": self.version, "model": self.art["best"], "horizonDays": self.art["horizon_days"],
                 "label": "CVE ajouté au catalogue KEV (CISA) dans les h jours suivant t0", "trainedAt": self.art["trained_at"],
                 "lookupCves": 0 if self.lookup is None else int(len(self.lookup)), "calibration": self.calibrator.method,
-                "prior": self.prior}
+                "prior": self.prior, "evaluation": self.evaluation()}
 
     def _row(self, cve_id: str | None, features: dict[str, Any] | None) -> dict[str, Any] | None:
         base: dict[str, Any] = {}

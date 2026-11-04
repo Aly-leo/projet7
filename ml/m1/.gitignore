@@ -7,7 +7,7 @@ __pycache__/
 *.pyc
 .env*
 
-# Verrou d'évaluation du test et table de consultation (dérivés des données brutes)
+# Verrou d'évaluation du test (local : il garantit que le test n'est évalué qu'une fois)
 models/m1_v1/test_evaluation.lock
-models/m1_v1/cve_lookup.parquet
-models/m1_v1/kev_ids.json
+# NB : cve_lookup.parquet (3,7 Mo) et kev_ids.json sont versionnés : le service déployé en a besoin pour répondre par `cveId`.
+# Ils se régénèrent avec `python -m m1.infer build-lookup` (instantané NVD/KEV de la date de collecte).

@@ -40,6 +40,8 @@ Réponse (même ordre) :
 
 `alreadyInKev: true` signale un CVE déjà listé : M1 n'a pas été entraîné sur ces cas (ils sont exclus de la cohorte), sa valeur n'a alors pas de sens.
 
+Déploiement en ligne (Docker, Railway, réseau privé) : voir `DEPLOIEMENT_RAILWAY.md`.
+
 ## Application Web (NestJS)
 
 Variables de `backend/.env` :

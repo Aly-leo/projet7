@@ -118,7 +118,7 @@ def create_app(model_dir=MODELS, token: str | None = None) -> FastAPI:
 def main() -> None:
     import uvicorn
 
-    uvicorn.run(create_app(), host=os.environ.get("M1_HOST", "127.0.0.1"), port=int(os.environ.get("M1_PORT", "8001")), log_level="warning")
+    uvicorn.run(create_app(), host=os.environ.get("M1_HOST", "127.0.0.1"), port=int(os.environ.get("M1_PORT") or os.environ.get("PORT") or "8001"), log_level="warning")
 
 
 if __name__ == "__main__":

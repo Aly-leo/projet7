@@ -13,7 +13,6 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import average_precision_score, brier_score_loss, f1_score, roc_auc_score
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
-from xgboost import XGBClassifier
 
 MODEL_ORDER = ["logreg", "random_forest", "xgboost"]  # du plus simple au plus complexe (départage des égalités)
 
@@ -44,6 +43,8 @@ def make_pipeline(name: str, params: dict[str, Any], cat: list[str], num: list[s
         pre = ColumnTransformer([("cat", ohe(), cat), ("num", imp(), num)])
         est = RandomForestClassifier(class_weight="balanced_subsample", n_jobs=-1, random_state=seed, **{"n_estimators": 300, **params})
     elif name == "xgboost":
+        from xgboost import XGBClassifier  # import paresseux : le service d'inférence n'en a pas besoin (modèle retenu : régression logistique)
+
         pre = ColumnTransformer([("cat", ohe(), cat), ("num", imp(), num)])
         est = XGBClassifier(subsample=0.8, colsample_bytree=0.8, scale_pos_weight=pos_weight, eval_metric="aucpr",
                             tree_method="hist", random_state=seed, n_jobs=-1, **params)
